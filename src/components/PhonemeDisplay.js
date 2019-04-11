@@ -1,7 +1,10 @@
 import React from 'react';
-//import { phonemeElement } from 'symbols';
+import { phonemeToSymbol } from '../lib/symbols';
+import { phonemes } from '../lib/phonemes';
 
 function PhonemeDisplay(props) {
+  console.log('pts', phonemeToSymbol('AE'));
+  console.log('pts', Object.keys(phonemes));
   return (
     <div>
       {props.text}
