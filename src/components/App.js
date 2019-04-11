@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import SearchBar from './SearchBar';
+import React from 'react';
+import PhonemeContainer from './PhonemeContainer';
 
 function App(props) {
   return (
@@ -8,8 +8,7 @@ function App(props) {
         <h1>Phoneme Finder</h1>
       </header>
       <main>
-        <SearchBar />
-        <div>Stuff</div>
+        <PhonemeContainer />
       </main>
     </React.Fragment>
   );
