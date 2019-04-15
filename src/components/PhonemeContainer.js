@@ -15,9 +15,10 @@ class PhonemeContainer extends Component {
 
   handleSearch(term) {
     if(term) {
-      this.decoder.decodeWord(term).then((decoded) => {
-        console.log('search', decoded);
-        this.setState({ searched: JSON.stringify(decoded)});
+      this.decoder.decodePhrase(term).then((decoded) => {
+        Promise.all(decoded).then((values) => {
+          this.setState({ searched: JSON.stringify(values) });
+        });
       });
     }
   }
@@ -26,7 +27,7 @@ class PhonemeContainer extends Component {
     return (
       <React.Fragment>
         <SearchBar onSearch={this.handleSearch} />
-        <PhonemeDisplay text={this.state.searched} />
+        <PhonemeDisplay decoded={this.state.searched} />
       </React.Fragment>
     );
   }

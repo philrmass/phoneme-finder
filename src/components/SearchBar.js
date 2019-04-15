@@ -18,13 +18,14 @@ class SearchBar extends Component {
   onSubmit(event) {
     event.preventDefault();
     this.props.onSearch(this.state.term);
+    this.setState({ term: '' });
   }
 
   render() {
     return (
       <form onSubmit={this.onSubmit}>
         <label htmlFor='term'></label>
-        <input id='term' type='text' onChange={this.onChange} />
+        <input id='term' type='text' value={this.state.term} onChange={this.onChange} />
         <button type='submit'>Search</button>
       </form>
     )
