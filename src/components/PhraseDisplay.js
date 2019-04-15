@@ -1,14 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import WordDisplay from './WordDisplay';
+import styles from '../stylesheets/PhraseDisplay.module.css';
 
 function PhraseDisplay(props) {
   return (
-    <React.Fragment>
+    <div className={styles.phraseDisplay}>
       {props.phrase.map((word) => (
         <WordDisplay word={word} />
       ))}
-    </React.Fragment>
+    </div>
   );
 }
 
