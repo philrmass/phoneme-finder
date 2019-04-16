@@ -44,33 +44,23 @@ export const phonemeSymbols = {
   'S': { shape: 'hexagon', color: 'white'}
 };
 
-//??? remove digit from the end of arpabet
-//??? split all 3 into phoneme arrays
+export function colorToCode(color) {
+  return colorCodes[color];
+}
+
+export const colorCodes = {
+  'red': '#ff0000',
+  'orange': '#ff8000',
+  'yellow': '#ffff00',
+  'green': '#00dd00',
+  'blue': '#0000ff',
+  'purple': '#a000f0',
+  'brown': '#905018',
+  'black': '#000000',
+  'white': '#ffffff'
+};
+
 /*
-class Display {
-  static getPhonemeSymbol(phoneme) {
-    let symbol = symbols[phoneme];
-    if(!symbol)
-      symbol = [undefined, undefined];
-    return symbol;
-  }
-
-  static getColorCode(color) {
-    const colorCodes = {
-      'red': '#ff0000',
-      'orange': '#ff8000',
-      'yellow': '#ffff00',
-      'green': '#00dd00',
-      'blue': '#0000ff',
-      'purple': '#a000f0',
-      'brown': '#905018',
-      'black': '#000000',
-      'white': '#ffffff'
-    };
-    const code = colorCodes[color];
-    return (code ? code : '#808080');
-  }
-
   static drawSymbol(shape, color, index, size, ctx) {
     ctx.fillStyle = Display.getColorCode(color);
     ctx.strokeStyle = '#000000';

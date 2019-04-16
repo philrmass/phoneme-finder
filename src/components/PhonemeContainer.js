@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import SearchBar from './SearchBar';
 import PhraseDisplay from './PhraseDisplay';
 import Decoder from '../api/decoder';
+import { phonemes } from '../lib/phonemes';
 //??? add prop types
 
 class PhonemeContainer extends Component {
@@ -25,6 +26,7 @@ class PhonemeContainer extends Component {
   }
 
   render() {
+    console.log('categories', Object.keys(phonemes));
     console.log('searched', this.state.searched);
     return (
       <React.Fragment>
