@@ -14,48 +14,13 @@ function symbol(shape, color) {
   } else if(shape === 'rhombus') {
     return (<polygon points="50,95 90,50 50,5 10,50" stroke-width="5%" stroke={stroke} fill={color} />);
   } else if(shape === 'star') {
-    return (
-      <React.Fragment>
-        <line x1="5%" y1="5%" x2="95%" y2="95%" stroke-width="5%" stroke='green' />
-        <line x1="5%" y1="95%" x2="95%" y2="5%" stroke-width="5%" stroke='green' />
-      </React.Fragment>
-    );
+    return (<polygon points="50,0 32.4,25.7 2.4,34.5 21.5,59.3" stroke-width="5%" stroke={stroke} fill={color} />);
   } else if(shape === 'hexagon') {
-    return (
-      <React.Fragment>
-        <line x1="5%" y1="5%" x2="95%" y2="95%" stroke-width="5%" stroke='purple' />
-        <line x1="5%" y1="95%" x2="95%" y2="5%" stroke-width="5%" stroke='purple' />
-      </React.Fragment>
-    );
+    return (<polygon points="98,50 74,91.6 26,91.6 2,50 26,8.4 74,8.4" stroke-width="5%" stroke={stroke} fill={color} />);
   };
 }
 
 /*
-    if(shape === 'circle') {
-      ctx.arc(x + size / 2, size / 2, size / 2 - padding, 0, 2 * Math.PI);
-    } else if(shape === 'square') {
-      ctx.rect(x + padding, padding, paddedSize, paddedSize);  
-    } else if(shape === 'triangle') {
-      ctx.moveTo(x + padding, size - padding);
-      ctx.lineTo(x + size - padding, size - padding);
-      ctx.lineTo(x + (size / 2), padding);
-      ctx.lineTo(x + padding, size - padding);
-    } else if(shape === 'rhombus') {
-      const halfSide = 0.45 * (size - 2 * padding);
-      ctx.moveTo(x + halfSize, (padding / 2));
-      ctx.lineTo(x + halfSize - halfSide, halfSize);
-      ctx.lineTo(x + halfSize, size);
-      ctx.lineTo(x + halfSize + halfSide, halfSize);
-      ctx.lineTo(x + halfSize, (padding / 2));
-    } else if(shape === 'hexagon') {
-      const halfSide = 0.285 * (size - 2 * padding);
-      ctx.moveTo(x + padding, halfSize);
-      ctx.lineTo(x + halfSize - halfSide, size - padding);
-      ctx.lineTo(x + halfSize + halfSide, size - padding);
-      ctx.lineTo(x + size -padding, halfSize);
-      ctx.lineTo(x + halfSize + halfSide, padding);
-      ctx.lineTo(x + halfSize - halfSide, padding);
-      ctx.lineTo(x + padding, halfSize);
     } else if(shape === 'star') {
       const sides = 5;
       const radius = halfSize;
@@ -68,8 +33,6 @@ function symbol(shape, color) {
         ctx.rotate(Math.PI / sides);
         ctx.lineTo(0, 0 - radius);
       }
-      ctx.translate(-x - halfSize, -halfSize);
-    }
     */
 
 function PhonemeDisplay(props) {
