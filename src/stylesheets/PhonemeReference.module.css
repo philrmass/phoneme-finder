@@ -1,3 +1,18 @@
 .phonemeReference {
-  color: red;
+  padding: 4px;
+  margin-top: 8px;
+  background-color: #f0f0f0;
+}
+
+.title {
+  font-weight: bold;
+}
+
+.phonemes {
+  font-size: 70px;
+}
+
+.phonemes h3 {
+  font-size: 18px;
+  color: #505050;
 }

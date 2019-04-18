@@ -3,16 +3,19 @@ import SearchBar from './SearchBar';
 import PhraseDisplay from './PhraseDisplay';
 import PhonemeReference from './PhonemeReference';
 import Decoder from '../api/decoder';
-import { phonemes } from '../lib/phonemes';
+import { words } from '../lib/phonemes';
 
 class PhonemeContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      searched: []
+      searched: [],
+      referenceIsOpen: true,
+      referenceDefs: {}
     };
     this.decoder = new Decoder();
     this.handleSearch = this.handleSearch.bind(this);
+    this.handleReferenceToggle = this.handleReferenceToggle.bind(this);
   }
 
   handleSearch(term) {
@@ -25,14 +28,32 @@ class PhonemeContainer extends Component {
     }
   }
 
+  handleReferenceToggle() {
+    this.setState((lastState) => ({ 
+      referenceIsOpen: !lastState.referenceIsOpen
+    }));
+  }
+
+  componentDidMount() {
+    const allWords = Object.values(words).join(' ');
+    this.decoder.decodePhrase(allWords).then((decoded) => {
+      Promise.all(decoded).then((values) => {
+        //??? reduce here into dictionary
+        this.setState({ referenceDefs: values });
+      });
+    });
+  }
+
   render() {
-    console.log('categories', Object.keys(phonemes));
-    console.log('searched', this.state.searched);
     return (
       <React.Fragment>
         <SearchBar onSearch={this.handleSearch} />
         <PhraseDisplay phrase={this.state.searched} />
-        <PhonemeReference />
+        <PhonemeReference 
+          isOpen={this.state.referenceIsOpen} 
+          words={words}
+          defs={this.state.referenceDefs}
+          onToggle={this.handleReferenceToggle} />
       </React.Fragment>
     );
   }

@@ -37,7 +37,7 @@ class Decoder {
     }
   }
 
-  static async decodeWord(word) {
+  static async queryWord(word) {
     const url = `https://api.datamuse.com/words?sp=${word.toLowerCase()}&md=r+d&ipa=1&max=1`;
     const response = await fetch(url);
     const definition = await response.json();
@@ -49,7 +49,7 @@ class Decoder {
     return words.map(async (word) => {
       let decoded = this.checkCache(word);
       if(!decoded) {
-        decoded = await Decoder.decodeWord(word);
+        decoded = await Decoder.queryWord(word);
         this.addToCache(decoded);
       }
       return decoded;

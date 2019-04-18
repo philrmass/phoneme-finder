@@ -17,6 +17,8 @@ function symbol(shape, color) {
     return (<polygon points="50,0 38.8,34.5 2.4,34.5 31.8,55.9 20.6,90.5 50,69.1 79.4,90.5 68.2,55.9 97.6,34.5 61.2,34.5" stroke-width="5%" stroke={stroke} fill={color} />);
   } else if(shape === 'hexagon') {
     return (<polygon points="98,50 74,91.6 26,91.6 2,50 26,8.4 74,8.4" stroke-width="5%" stroke={stroke} fill={color} />);
+  } else {
+    return null;
   };
 }
 
