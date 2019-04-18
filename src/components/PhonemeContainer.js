@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import SearchBar from './SearchBar';
 import PhraseDisplay from './PhraseDisplay';
+import PhonemeReference from './PhonemeReference';
 import Decoder from '../api/decoder';
 import { phonemes } from '../lib/phonemes';
-//??? add prop types
 
 class PhonemeContainer extends Component {
   constructor(props) {
@@ -32,6 +32,7 @@ class PhonemeContainer extends Component {
       <React.Fragment>
         <SearchBar onSearch={this.handleSearch} />
         <PhraseDisplay phrase={this.state.searched} />
+        <PhonemeReference />
       </React.Fragment>
     );
   }
