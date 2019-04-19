@@ -38,8 +38,10 @@ class PhonemeContainer extends Component {
     const allWords = Object.values(words).join(' ');
     this.decoder.decodePhrase(allWords).then((decoded) => {
       Promise.all(decoded).then((values) => {
-        //??? reduce here into dictionary
-        this.setState({ referenceDefs: values });
+        const defs = values.reduce((dict, word) => {
+          return { ...dict, [word.word]: word };
+        }, {});
+        this.setState({ referenceDefs: defs });
       });
     });
   }

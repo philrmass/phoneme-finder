@@ -1,22 +1,26 @@
 import React from 'react';
 //import PropTypes from 'prop-types';
 import PhonemeDisplay from './PhonemeDisplay';
-//import WordDisplay from './WordDisplay';
+import WordDisplay from './WordDisplay';
 import { phonemes } from '../lib/phonemes';
 import styles from '../stylesheets/PhonemeReference.module.css';
 
-function reference(categoryObj) {
-  const categories = Object.keys(categoryObj);
+function reference(categoryDict, wordDict, defDict) {
+  const categories = Object.keys(categoryDict);
   const elems = categories.map((category) => {
-    const phonemes = categoryObj[category];
+    const phonemes = categoryDict[category];
     return (
       <React.Fragment>
         <h3>{category}</h3>
-        {phonemes.map((phoneme) => (
-          <div>
-            <PhonemeDisplay phoneme={phoneme}/>
-          </div>
-        ))}
+        {phonemes.map((phoneme) => {
+          const def = defDict[wordDict[phoneme]];
+          return (
+            <div>
+              <PhonemeDisplay phoneme={phoneme}/>
+              <WordDisplay word={def}/>
+            </div>
+          );
+        })}
       </React.Fragment>
     );
   });
@@ -33,10 +37,8 @@ function PhonemeReference(props) {
       <div className={styles.title} onClick={props.onToggle}>
           Phoneme Reference
       </div>
-      <div>{ JSON.stringify(props.words) }</div>
-      <div>{ JSON.stringify(props.defs) }</div>
       <div className={styles.phonemes}>
-        { props.isOpen ? reference(phonemes) : null }
+        { props.isOpen ? reference(phonemes, props.words, props.defs) : null }
       </div>
     </div>
   );

@@ -6,6 +6,7 @@ import styles from '../stylesheets/WordDisplay.module.css';
 function WordDisplay(props) {
   return (
     <React.Fragment>
+      { props.word && (
       <div className={styles.wordDisplay}>
         <div>{props.word.word}</div>
         <div>
@@ -14,6 +15,7 @@ function WordDisplay(props) {
           ))}
         </div>
       </div>
+      )}
     </React.Fragment>
   );
 }
