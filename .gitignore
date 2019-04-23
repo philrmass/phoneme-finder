@@ -27,3 +27,4 @@ yarn-error.log*
 _*.js
 _*.json
 _*.text
+_*.ods
