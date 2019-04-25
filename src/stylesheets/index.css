@@ -26,3 +26,29 @@ main {
 button {
   margin: 0 8px;
 }
+
+.phonemeReference {
+  padding: 16px;
+  background-color: #f0d0e0;
+}
+
+.phonemeBox {
+  padding: 16px;
+  background-color: #f0e0d0;
+}
+
+.phonemeGroupName {
+  padding: 16px;
+  background-color: #e0f0d0;
+}
+
+.phonemeGroup {
+  padding: 16px;
+  background-color: #d0f0e0;
+}
+
+.phoneme {
+  padding: 16px;
+  background-color: #d0e0f0;
+  border: 1px solid #b0d0f0;
+}

@@ -1,3 +1,11 @@
+export const layout = [
+  ['Monophthongs'],
+  ['Diphthongs'],
+  ['Stops', 'Affricates'],
+  ['Nasals', 'R-colored vowels', 'Liquids', 'Semivowels'],
+  ['Fricatives'],
+];
+
 export const phonemes = {
   'Monophthongs' : ['AE', 'IH', 'AA', 'EH', 'IY', 'UW', 'AH', 'AO', 'UH'],
   'Diphthongs' : ['AW', 'OY', 'AY', 'EY', 'OW'],
@@ -15,7 +23,7 @@ export const words = {
   'AA': 'odd',
   'IY': 'eat',
   'UW': 'two',
-  'EH': 'Ed',
+  'EH': 'led',
   'IH': 'it',
   'UH': 'hood',
   'AH': 'hut',
