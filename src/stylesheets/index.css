@@ -28,27 +28,33 @@ button {
 }
 
 .phonemeReference {
-  padding: 16px;
-  background-color: #f0d0e0;
+  display: inline-block;
+  padding: 4px;
+  border: 1px solid #b0b0b0;
+  margin-top: 16px;
+}
+
+.phonemeBoxes {
+  display: flex;
 }
 
 .phonemeBox {
-  padding: 16px;
-  background-color: #f0e0d0;
+  display: inline-block;
 }
 
 .phonemeGroupName {
-  padding: 16px;
-  background-color: #e0f0d0;
+  padding: 4px 8px;
 }
 
 .phonemeGroup {
-  padding: 16px;
-  background-color: #d0f0e0;
+  margin: 0 4px;
+}
+
+.phonemeTitle {
+  font-size: 2em;
 }
 
 .phoneme {
-  padding: 16px;
-  background-color: #d0e0f0;
-  border: 1px solid #b0d0f0;
+  padding: 0 4px;
+  font-size: 1.6em;
 }
