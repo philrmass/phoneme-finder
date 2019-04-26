@@ -1,10 +1,12 @@
 import React from 'react';
+//??? add prop types to phoneme reference
 //import PropTypes from 'prop-types';
 import PhonemeDisplay from './PhonemeDisplay';
 import WordDisplay from './WordDisplay';
 import { layout, phonemes } from '../lib/phonemes';
 import styles from '../stylesheets/PhonemeReference.module.css';
 
+//??? clean up phoneme reference functions
 function group(groupName, categoryDict, wordDict, defDict) {
   const phonemes = categoryDict[groupName];
   return (

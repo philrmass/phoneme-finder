@@ -8,7 +8,9 @@ function WordDisplay(props) {
     <React.Fragment>
       { props.word && (
       <div className={styles.wordDisplay}>
-        <div>{props.word.word}</div>
+        <div className={styles.word}>
+          {props.word.word}
+        </div>
         <div>
           {props.word.phonemes.map((phoneme) => (
             <PhonemeDisplay phoneme={phoneme} />
