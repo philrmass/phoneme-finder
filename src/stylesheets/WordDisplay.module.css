@@ -9,3 +9,7 @@
 .word {
   font-size: 2.5em;
 }
+
+.phonemeWrap {
+  display: flex;
+}

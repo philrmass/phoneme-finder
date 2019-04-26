@@ -1,19 +1,37 @@
-/*
 .phonemeReference {
+  display: inline-block;
+  border: 1px solid #b0b0b0;
+  border-radius: 0.2em;
   padding: 4px;
-  margin-top: 8px;
+}
+
+.boxes {
+  display: flex;
+}
+
+.boxWrap {
+  padding-top: 0.5em;
+}
+
+.groupName {
+  color: var(--mid-text-color);
+  font-size: 1.2em;
+}
+
+.group {
+  margin: 0 4px;
+}
+
+.phoneme {
+  display: flex;
+  align-items: center;
+}
+
+.phonemeKey {
+  font-size: 2.33em;
 }
 
 .title {
+  font-size: 1.2em;
   font-weight: bold;
 }
-
-.phonemes {
-  font-size: 70px;
-}
-
-.phonemes h3 {
-  font-size: 18px;
-  color: #505050;
-}
-*/

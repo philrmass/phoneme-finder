@@ -11,7 +11,7 @@ function WordDisplay(props) {
         <div className={styles.word}>
           {props.word.word}
         </div>
-        <div>
+        <div className={styles.phonemeWrap}>
           {props.word.phonemes.map((phoneme) => (
             <PhonemeDisplay phoneme={phoneme} />
           ))}

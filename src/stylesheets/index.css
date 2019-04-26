@@ -1,5 +1,6 @@
 :root {
   --dark-text-color: #404040;
+  --mid-text-color: #686868;
   --border-color: #d0d0d0;
   --light-background-color: #f0f0f0;
 }
@@ -33,44 +34,10 @@ button {
 }
 
 .phraseDisplay {
-  font-size: 3.2rem;
+  font-size: 3.0rem;
 }
 
 .phonemeReference {
-  font-size: 1.8rem;
-}
-
-  /*
-.phonemeReference {
-
-  display: inline-block;
-  padding: 4px;
-  border: 1px solid #b0b0b0;
   margin-top: 16px;
+  font-size: 1.4rem;
 }
-
-.phonemeBoxes {
-  display: flex;
-}
-
-.phonemeBox {
-  display: inline-block;
-}
-
-.phonemeGroupName {
-  padding: 4px 8px;
-}
-
-.phonemeGroup {
-  margin: 0 4px;
-}
-
-.phonemeTitle {
-  font-size: 2em;
-}
-
-.phoneme {
-  padding: 0 4px;
-  font-size: 1.6em;
-}
-*/

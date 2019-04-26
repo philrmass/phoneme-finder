@@ -3,7 +3,7 @@ export const layout = [
   ['Diphthongs', 'Nasals'],
   ['Stops', 'Affricates'],
   ['Fricatives'],
-  ['R-colored vowels', 'Liquids', 'Semivowels'],
+  ['Liquids', 'R-colored vowels', 'Semivowels'],
 ];
 
 export const phonemes = {

@@ -24,5 +24,6 @@
 .phoneme {
   display: flex;
   justify-content: center;
+  width: 1.5em;
   font-size: 1em;
 }

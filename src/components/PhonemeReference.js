@@ -10,12 +10,12 @@ import styles from '../stylesheets/PhonemeReference.module.css';
 function group(groupName, categoryDict, wordDict, defDict) {
   const phonemes = categoryDict[groupName];
   return (
-    <div className='phonemeGroup'>
+    <div className={styles.group}>
       {phonemes.map((phoneme) => {
         const def = defDict[wordDict[phoneme]];
         return (
-          <div className='phoneme'>
-            <span className='phonemeTitle'>
+          <div className={styles.phoneme}>
+            <span className={styles.phonemeKey}>
               <PhonemeDisplay phoneme={phoneme}/>
             </span>
             <WordDisplay word={def}/>
@@ -28,10 +28,10 @@ function group(groupName, categoryDict, wordDict, defDict) {
 
 function reference(layout, categoryDict, wordDict, defDict) {
   const boxes = layout.map((box) => (
-    <div className='phonemeBox'>
+    <div className={styles.boxWrap}>
       {box.map((groupName) => (
         <React.Fragment>
-          <div className='phonemeGroupName'>{groupName}</div>
+          <div className={styles.groupName}>{groupName}</div>
           {group(groupName, categoryDict, wordDict, defDict)}
         </React.Fragment>
       ))}
@@ -43,11 +43,13 @@ function reference(layout, categoryDict, wordDict, defDict) {
 function PhonemeReference(props) {
   return (
     <div className='phonemeReference'>
-      <div className={styles.title} onClick={props.onToggle}>
+      <div className={styles.phonemeReference}>
+        <div className={styles.title} onClick={props.onToggle}>
           Phoneme Reference
-      </div>
-      <div className='phonemeBoxes'>
-        { props.isOpen ? reference(layout, phonemes, props.words, props.defs) : null }
+        </div>
+        <div className={styles.boxes}>
+          { props.isOpen ? reference(layout, phonemes, props.words, props.defs) : null }
+        </div>
       </div>
     </div>
   );
