@@ -8,6 +8,8 @@ This application helps teach reading and writing by familiarizing the user with 
 
 You can see the deployed application [here](https://philrmass.github.io/phoneme-finder/)
 
+![Screenshot](./docs/screenshot.png)
+
 ## Usage 
 
 To use the website, choose a word that is somewhat unfamiliar, help the student to sound out the word, and then break it down into phonemes, writing down the symbol and color for each as you go. Once you think you've decoded the word, type it into the search bar to see if you are right. There are words that can be pronounced in several ways, and so have different phoneme spellings, so if you don't think the phonemes match, that could be the cause. Also, be aware that often there are fewer phonems than letters in a word, and occasionally there are more phonemes than words. So have fun and learn!
