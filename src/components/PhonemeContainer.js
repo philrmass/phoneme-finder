@@ -1,19 +1,32 @@
-import React, { useEffect, Component } from 'react';
-import SearchBar from './SearchBar';
-import PhraseDisplay from './PhraseDisplay';
+import React, { useEffect, useState } from 'react';
+import { words } from '../lib/phonemes.js';
+//import SearchBar from './SearchBar';
+//import PhraseDisplay from './PhraseDisplay';
 import PhonemeReference from './PhonemeReference';
 import Decoder from '../api/decoder';
-import { words } from '../lib/phonemes';
 
-class PhonemeContainer extends Component {
+function PhonemeContainer(props) {
+  const [decoder] = useState(new Decoder());
+  const [referenceIsOpen, setReferenceIsOpen] = useState(true);
+  const [referenceDefs, setReferenceDefs] = useState({});
+
+  useEffect(() => {
+    const phrase = Object.values(words).join(' ');
+    decoder.decodePhrase(phrase).then((decoded) => {
+      Promise.all(decoded).then((values) => {
+        setReferenceDefs(values.reduce((dict, def) => {
+          return { ...dict, [def.word]: def };
+        }, {}));
+      });
+    });
+  }, []);
+
+  /*
   constructor(props) {
     super(props);
     this.state = {
       searched: [],
-      referenceIsOpen: true,
-      referenceDefs: {}
     };
-    this.decoder = new Decoder();
     this.handleSearch = this.handleSearch.bind(this);
     this.handleReferenceToggle = this.handleReferenceToggle.bind(this);
   }
@@ -28,36 +41,23 @@ class PhonemeContainer extends Component {
     }
   }
 
-  handleReferenceToggle() {
-    this.setState((lastState) => ({ 
-      referenceIsOpen: !lastState.referenceIsOpen
-    }));
+*/
+  const handleReferenceToggle = () => {
+    setReferenceIsOpen(!referenceIsOpen);
   }
 
-  componentDidMount() {
-    const allWords = Object.values(words).join(' ');
-    this.decoder.decodePhrase(allWords).then((decoded) => {
-      Promise.all(decoded).then((values) => {
-        const defs = values.reduce((dict, word) => {
-          return { ...dict, [word.word]: word };
-        }, {});
-        this.setState({ referenceDefs: defs });
-      });
-    });
-  }
-
-  render() {
-    return (
-      <React.Fragment>
-        <SearchBar onSearch={this.handleSearch} />
-        <PhraseDisplay phrase={this.state.searched} />
-        <PhonemeReference 
-          defs={this.state.referenceDefs}
-          isOpen={this.state.referenceIsOpen} 
-          onToggle={this.handleReferenceToggle} />
-      </React.Fragment>
-    );
-  }
+  return (
+    <React.Fragment>
+      {/*
+      <SearchBar onSearch={this.handleSearch} />
+      <PhraseDisplay phrase={this.state.searched} />
+      */}
+      <PhonemeReference 
+        defs={referenceDefs}
+        isOpen={referenceIsOpen}
+        onToggle={handleReferenceToggle} />
+    </React.Fragment>
+  );
 }
 
 export default PhonemeContainer;
