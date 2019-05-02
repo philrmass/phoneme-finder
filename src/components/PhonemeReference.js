@@ -1,43 +1,40 @@
 import React from 'react';
-//??? add prop types to phoneme reference
-//import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
+import { layout, phonemes, words } from '../lib/phonemes.js';
 import PhonemeDisplay from './PhonemeDisplay';
 import WordDisplay from './WordDisplay';
-import { layout, phonemes } from '../lib/phonemes';
 import styles from '../stylesheets/PhonemeReference.module.css';
 
-//??? clean up phoneme reference functions
-function group(groupName, categoryDict, wordDict, defDict) {
-  const phonemes = categoryDict[groupName];
+function phonemeKey(phoneme, def) {
   return (
-    <div className={styles.group}>
-      {phonemes.map((phoneme) => {
-        const def = defDict[wordDict[phoneme]];
-        return (
-          <div className={styles.phoneme}>
-            <span className={styles.phonemeKey}>
-              <PhonemeDisplay phoneme={phoneme}/>
-            </span>
-            <WordDisplay word={def}/>
-          </div>
-        );
-      })}
-    </div>
+    <React.Fragment>
+      <div className={styles.phonemeKey}>
+        <span className={styles.phoneme}>
+          <PhonemeDisplay phoneme={phoneme}/>
+        </span>
+        <WordDisplay word={def}/>
+      </div>
+    </React.Fragment>
   );
 }
 
-function reference(layout, categoryDict, wordDict, defDict) {
-  const boxes = layout.map((box) => (
-    <div className={styles.boxWrap}>
-      {box.map((groupName) => (
-        <React.Fragment>
-          <div className={styles.groupName}>{groupName}</div>
-          {group(groupName, categoryDict, wordDict, defDict)}
-        </React.Fragment>
-      ))}
+function phonemeGroup(group, defs) {
+  return (
+    <React.Fragment>
+      <div className={styles.groupName}>{group}</div>
+      <div className={styles.group}>
+        {phonemes[group].map((phoneme) => phonemeKey(phoneme, defs[words[phoneme]]))}
+      </div>
+    </React.Fragment>
+  );
+}
+
+function phonemeColumn(column, defs) {
+  return (
+    <div className={styles.column}>
+      {column.map((group) => phonemeGroup(group, defs))}
     </div>
-  ));
-  return boxes;
+  );
 }
 
 function PhonemeReference(props) {
@@ -47,12 +44,18 @@ function PhonemeReference(props) {
         <div className={styles.title} onClick={props.onToggle}>
           Phoneme Reference
         </div>
-        <div className={styles.boxes}>
-          { props.isOpen ? reference(layout, phonemes, props.words, props.defs) : null }
+        <div className={styles.columns}>
+          { props.isOpen && layout.map((column) => phonemeColumn(column, props.defs)) }
         </div>
       </div>
     </div>
   );
 }
+
+PhonemeReference.propTypes = {
+  defs: PropTypes.object,
+  isOpen: PropTypes.bool,
+  onToggle: PropTypes.func,
+};
 
 export default PhonemeReference;

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useEffect, Component } from 'react';
 import SearchBar from './SearchBar';
 import PhraseDisplay from './PhraseDisplay';
 import PhonemeReference from './PhonemeReference';
@@ -52,9 +52,8 @@ class PhonemeContainer extends Component {
         <SearchBar onSearch={this.handleSearch} />
         <PhraseDisplay phrase={this.state.searched} />
         <PhonemeReference 
-          isOpen={this.state.referenceIsOpen} 
-          words={words}
           defs={this.state.referenceDefs}
+          isOpen={this.state.referenceIsOpen} 
           onToggle={this.handleReferenceToggle} />
       </React.Fragment>
     );
