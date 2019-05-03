@@ -1,15 +1,19 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import TestWord from './TestWord';
 import styles from '../styles/TestWords.module.css';
 
 function TestWords(props) {
-  const [testWords, setTestWords] = useState([]);
-  const [search, setSearch] = useState('');
+  const [testDefs, setTestDefs] = useState([]);
+  const [search, setSearch] = useState('hello there');
 
   const onSubmit = (e) => {
     e.preventDefault();
-    setTestWords([...testWords, search]);
-    console.log('TEST ADD', search, testWords);
+    props.decoder.decodePhrase(search).then((decoded) => {
+      Promise.all(decoded).then((defs) => {
+        setTestDefs([...testDefs, ...defs]);
+      });
+    });
     setSearch('');
   };
 
@@ -20,8 +24,10 @@ function TestWords(props) {
           <label className={styles.title} htmlFor='search' onClick={props.onToggle}>Test Words</label>
           <input id='search' type='text' value={search} onChange={(e) => setSearch(e.target.value)}/>
           <button type='submit'>Add</button>
-          </form>
-        { props.isOpen && <div>OPEN</div> }
+        </form>
+        <div className={styles.wordsWrap}>
+          { props.isOpen && testDefs.map((def) => <TestWord def={def} isActive={true}/>) }
+        </div>
       </div>
     </div>
   )
