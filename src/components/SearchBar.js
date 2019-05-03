@@ -1,35 +1,22 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-class SearchBar extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      term: ''
-    }
-    this.onChange = this.onChange.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
-  }
+function SearchBar(props) {
+  const [search, setSearch] = useState('');
 
-  onChange(event) {
-    this.setState({ term: event.target.value });
-  }
+  const onSubmit = (e) => {
+    e.preventDefault();
+    props.onSearch(search);
+    setSearch('');
+  };
 
-  onSubmit(event) {
-    event.preventDefault();
-    this.props.onSearch(this.state.term);
-    this.setState({ term: '' });
-  }
-
-  render() {
-    return (
-      <form onSubmit={this.onSubmit}>
-        <label htmlFor='term'></label>
-        <input id='term' type='text' value={this.state.term} onChange={this.onChange} />
-        <button type='submit'>Search</button>
-      </form>
-    )
-  }
+  return (
+    <form onSubmit={onSubmit}>
+    <label htmlFor='search'></label>
+    <input id='search' type='text' value={search} onChange={(e) => setSearch(e.target.value)}/>
+    <button type='submit'>Search</button>
+    </form>
+  )
 }
 
 SearchBar.propTypes = {
