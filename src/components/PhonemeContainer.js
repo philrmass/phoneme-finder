@@ -1,14 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import { words } from '../lib/phonemes.js';
-//import SearchBar from './SearchBar';
-//import PhraseDisplay from './PhraseDisplay';
+import Decoder from '../lib/decoder';
+import PhraseDisplay from './PhraseDisplay';
 import PhonemeReference from './PhonemeReference';
-import Decoder from '../api/decoder';
+import SearchBar from './SearchBar';
 
 function PhonemeContainer(props) {
   const [decoder] = useState(new Decoder());
+  const [search, setSearch] = useState('');
+  const [searchDefs, setSearchDefs] = useState([]);
   const [referenceIsOpen, setReferenceIsOpen] = useState(true);
   const [referenceDefs, setReferenceDefs] = useState({});
+
+  useEffect(() => {
+    if(search) {
+      decoder.decodePhrase(search).then((decoded) => {
+        Promise.all(decoded).then((defs) => {
+          setSearchDefs(defs);
+        });
+      });
+    } else {
+      setSearchDefs([]);
+    }
+  }, [search]);
 
   useEffect(() => {
     const phrase = Object.values(words).join(' ');
@@ -21,37 +35,14 @@ function PhonemeContainer(props) {
     });
   }, []);
 
-  /*
-  constructor(props) {
-    super(props);
-    this.state = {
-      searched: [],
-    };
-    this.handleSearch = this.handleSearch.bind(this);
-    this.handleReferenceToggle = this.handleReferenceToggle.bind(this);
-  }
-
-  handleSearch(term) {
-    if(term) {
-      this.decoder.decodePhrase(term).then((decoded) => {
-        Promise.all(decoded).then((values) => {
-          this.setState({ searched: values });
-        });
-      });
-    }
-  }
-
-*/
   const handleReferenceToggle = () => {
     setReferenceIsOpen(!referenceIsOpen);
   }
 
   return (
     <React.Fragment>
-      {/*
-      <SearchBar onSearch={this.handleSearch} />
-      <PhraseDisplay phrase={this.state.searched} />
-      */}
+      <SearchBar onSearch={setSearch} />
+      <PhraseDisplay defs={searchDefs} />
       <PhonemeReference 
         defs={referenceDefs}
         isOpen={referenceIsOpen}

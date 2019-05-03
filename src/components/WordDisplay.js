@@ -6,13 +6,13 @@ import styles from '../stylesheets/WordDisplay.module.css';
 function WordDisplay(props) {
   return (
     <React.Fragment>
-      { props.word && (
+      { props.def && (
       <div className={styles.wordDisplay}>
         <div className={styles.word}>
-          {props.word.word}
+          {props.def.word}
         </div>
         <div className={styles.phonemeWrap}>
-          {props.word.phonemes.map((phoneme) => (
+          {props.def.phonemes.map((phoneme) => (
             <PhonemeDisplay phoneme={phoneme} />
           ))}
         </div>
@@ -23,7 +23,7 @@ function WordDisplay(props) {
 }
 
 WordDisplay.propTypes = {
-  word: PropTypes.object
+  def: PropTypes.object
 };
 
 export default WordDisplay;

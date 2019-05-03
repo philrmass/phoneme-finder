@@ -5,15 +5,15 @@ import WordDisplay from './WordDisplay';
 function PhraseDisplay(props) {
   return (
     <div className='phraseDisplay'>
-      {props.phrase.map((word) => (
-        <WordDisplay word={word} />
+      {props.defs.map((def) => (
+        <WordDisplay def={def} />
       ))}
     </div>
   );
 }
 
 PhraseDisplay.propTypes = {
-  word: PropTypes.arrayOf(PropTypes.object)
+  defs: PropTypes.arrayOf(PropTypes.object)
 };
 
 export default PhraseDisplay;

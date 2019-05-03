@@ -13,7 +13,7 @@ function PhonemeReference(props) {
           <span className={styles.phoneme}>
             <PhonemeDisplay phoneme={phoneme}/>
           </span>
-          <WordDisplay word={def}/>
+          <WordDisplay def={def}/>
         </div>
       </React.Fragment>
     );
