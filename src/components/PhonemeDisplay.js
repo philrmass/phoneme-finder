@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { phonemeToSymbol, colorToCode } from '../lib/symbols';
-import styles from '../stylesheets/PhonemeDisplay.module.css';
+import styles from '../styles/PhonemeDisplay.module.css';
 
 function symbol(shape, color) {
   const stroke = '#404040';

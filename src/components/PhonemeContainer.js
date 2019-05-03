@@ -4,9 +4,11 @@ import Decoder from '../lib/decoder';
 import PhraseDisplay from './PhraseDisplay';
 import PhonemeReference from './PhonemeReference';
 import SearchBar from './SearchBar';
+import TestWords from './TestWords';
 
 function PhonemeContainer(props) {
   const [decoder] = useState(new Decoder());
+  const [testIsOpen, setTestIsOpen] = useState(true);
   const [search, setSearch] = useState('');
   const [searchDefs, setSearchDefs] = useState([]);
   const [referenceIsOpen, setReferenceIsOpen] = useState(true);
@@ -35,18 +37,26 @@ function PhonemeContainer(props) {
     });
   }, []);
 
+  const handleTestToggle = () => {
+    setTestIsOpen(!testIsOpen);
+  }
+
   const handleReferenceToggle = () => {
     setReferenceIsOpen(!referenceIsOpen);
   }
 
   return (
     <React.Fragment>
-      <SearchBar onSearch={setSearch} />
-      <PhraseDisplay defs={searchDefs} />
+      <TestWords 
+        decoder={decoder}
+        isOpen={testIsOpen}
+        onToggle={handleTestToggle}/>
+      <SearchBar onSearch={setSearch}/>
+      <PhraseDisplay defs={searchDefs}/>
       <PhonemeReference 
         defs={referenceDefs}
         isOpen={referenceIsOpen}
-        onToggle={handleReferenceToggle} />
+        onToggle={handleReferenceToggle}/>
     </React.Fragment>
   );
 }

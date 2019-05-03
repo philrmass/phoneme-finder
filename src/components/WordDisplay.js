@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import PhonemeDisplay from './PhonemeDisplay';
-import styles from '../stylesheets/WordDisplay.module.css';
+import styles from '../styles/WordDisplay.module.css';
 
 function WordDisplay(props) {
   return (

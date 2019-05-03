@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { layout, phonemes, words } from '../lib/phonemes.js';
 import PhonemeDisplay from './PhonemeDisplay';
 import WordDisplay from './WordDisplay';
-import styles from '../stylesheets/PhonemeReference.module.css';
+import styles from '../styles/PhonemeReference.module.css';
 
 function PhonemeReference(props) {
   function phonemeKey(phoneme, def) {

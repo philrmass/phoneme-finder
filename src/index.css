@@ -33,6 +33,11 @@ button {
   margin: 0 8px;
 }
 
+.testWords {
+  margin-bottom: 16px;
+  font-size: 1.4rem;
+}
+
 .phraseDisplay {
   font-size: 3.0rem;
 }
