@@ -6,6 +6,10 @@
   background: var(--light-background-color);
 }
 
+.testWord.active {
+  font-size: 2.0em;
+}
+
 .word {
   font-size: 2.5em;
 }
@@ -18,4 +22,6 @@
   min-height: 2.5em;
 }
 
-
+.complete {
+  background: #c0ffd0;
+}

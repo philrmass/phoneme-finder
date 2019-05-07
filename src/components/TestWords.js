@@ -5,7 +5,7 @@ import styles from '../styles/TestWords.module.css';
 
 function TestWords(props) {
   const [testDefs, setTestDefs] = useState([]);
-  const [search, setSearch] = useState('hello there');
+  const [search, setSearch] = useState('hat shout');
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -17,6 +17,10 @@ function TestWords(props) {
     setSearch('');
   };
 
+  const handleComplete = (word) => {
+    console.log('complete', word);
+  }
+
   return (
     <div className='testWords'>
       <div className={styles.testWords}>
@@ -26,8 +30,11 @@ function TestWords(props) {
           <button type='submit'>Add</button>
         </form>
         <div className={styles.wordsWrap}>
-          { props.isOpen && testDefs.map((def) => <TestWord def={def} isActive={true}/>) }
-        </div>
+          { props.isOpen && testDefs.map((def) => 
+            (<TestWord 
+              def={def}
+              onComplete={handleComplete}/>)) }
+          </div>
       </div>
     </div>
   )
