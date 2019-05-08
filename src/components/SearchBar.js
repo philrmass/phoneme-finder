@@ -12,9 +12,9 @@ function SearchBar(props) {
 
   return (
     <form onSubmit={onSubmit}>
-    <label htmlFor='search'></label>
-    <input id='search' type='text' value={search} onChange={(e) => setSearch(e.target.value)}/>
-    <button type='submit'>Search</button>
+      <label htmlFor='search'></label>
+      <input id='search' type='text' value={search} onChange={(e) => setSearch(e.target.value)}/>
+      <button type='submit'>Search</button>
     </form>
   )
 }

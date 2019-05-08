@@ -4,11 +4,11 @@ import WordDisplay from './WordDisplay';
 
 function PhraseDisplay(props) {
   return (
-    <div className='phraseDisplay'>
+    <React.Fragment>
       {props.defs.map((def) => (
         <WordDisplay def={def} />
       ))}
-    </div>
+    </React.Fragment>
   );
 }
 
