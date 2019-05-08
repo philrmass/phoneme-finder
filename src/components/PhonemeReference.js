@@ -1,14 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { layout, phonemes, words } from '../lib/phonemes.js';
 import PhonemeDisplay from './PhonemeDisplay';
 import PhraseDisplay from './PhraseDisplay';
-import SearchBar from './SearchBar';
 import WordDisplay from './WordDisplay';
 import styles from '../styles/PhonemeReference.module.css';
 
 function PhonemeReference(props) {
-  const [query, setQuery] = useState('');
+  const [input, setInput] = useState('');
   const [search, setSearch] = useState('');
   const [searchDefs, setSearchDefs] = useState([]);
   const [referenceDefs, setReferenceDefs] = useState({});
@@ -25,6 +24,17 @@ function PhonemeReference(props) {
     }
   }, [search]);
 
+  const onSubmit = (e) => {
+    e.preventDefault();
+    setSearch(input);
+    setInput('');
+  }
+
+  const handleClear = (e) => {
+    e.preventDefault();
+    setSearch('');
+  }
+
   useEffect(() => {
     const phrase = Object.values(words).join(' ');
     props.decoder.decodePhrase(phrase).then((decoded) => {
@@ -35,12 +45,6 @@ function PhonemeReference(props) {
       });
     });
   }, []);
-
-  const onSubmit = (e) => {
-    e.preventDefault();
-    setSearch(query);
-    setQuery('');
-  }
 
   function phonemeKey(phoneme, def) {
     return (
@@ -81,8 +85,9 @@ function PhonemeReference(props) {
           <label className={styles.title} htmlFor='search' onClick={props.onToggle}>
             Phoneme Reference
           </label>
-          <input id='search' type='text' value={query} onChange={(e) => setQuery(e.target.value)}/>
-          <button type='submit'>Search</button>
+          <input id='search' type='text' value={input} onChange={(e) => setInput(e.target.value)}/>
+          <button className='margin-left-4' type='submit'>Search</button>
+          <button className='margin-left-4' onClick={handleClear}>Clear</button>
         </form>
         <div className={styles.searchDisplay}>
           <PhraseDisplay defs={searchDefs}/>

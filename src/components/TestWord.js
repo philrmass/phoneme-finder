@@ -7,7 +7,7 @@ function WordDisplay(props) {
   const [isActive, setIsActive] = useState(false);
   const [shownCount, setShownCount] = useState(0);
 
-  const handleDoubleClick = () => {
+  const handleDoubleClick = (e) => {
     setIsActive(!isActive);
     if(!isActive) {
       setShownCount(0);
@@ -46,6 +46,7 @@ function WordDisplay(props) {
       { props.def && (
         <div 
           className={classes}
+          onMouseDown={(e) => e.preventDefault()}
           onDoubleClick={handleDoubleClick}
           onDragOver={handleDragOver}
           onDrop={handleDrop}>

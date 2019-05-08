@@ -12,4 +12,5 @@
 
 .wordsWrap {
   display: flex;
+  flex-wrap: wrap;
 }

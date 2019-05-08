@@ -1,21 +1,48 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import TestWord from './TestWord';
 import styles from '../styles/TestWords.module.css';
 
 function TestWords(props) {
+  const [input, setInput] = useState('');
+  const [add, setAdd] = useState('');
   const [testDefs, setTestDefs] = useState([]);
-  const [search, setSearch] = useState('hat shout');
+
+  useEffect(() => {
+    if (testDefs.length === 0) {
+      const defString = window.localStorage && window.localStorage.getItem('_testDefs');
+      let defs;
+      if (defString) {
+        defs = JSON.parse(defString);
+      }
+      if (Array.isArray(defs)) {
+        setTestDefs(defs);
+      }
+    } else {
+      if(window.localStorage) {
+        window.localStorage.setItem('_testDefs', JSON.stringify(testDefs));
+      }
+    }
+  }, [testDefs]);
+
+  useEffect(() => {
+    if (add) {
+      props.decoder.decodePhrase(add).then((decoded) => {
+        Promise.all(decoded).then((defs) => {
+          setTestDefs([...testDefs, ...defs]);
+          console.log('ADD', defs);
+        });
+      });
+      setAdd('');
+      document.getElementById('input').focus();
+    }
+  }, [add]);
 
   const onSubmit = (e) => {
     e.preventDefault();
-    props.decoder.decodePhrase(search).then((decoded) => {
-      Promise.all(decoded).then((defs) => {
-        setTestDefs([...testDefs, ...defs]);
-      });
-    });
-    setSearch('');
-  };
+    setAdd(input);
+    setInput('');
+  }
 
   const handleComplete = (word) => {
     console.log('complete', word);
@@ -25,15 +52,16 @@ function TestWords(props) {
     <div className='testWords'>
       <div className={styles.testWords}>
         <form onSubmit={onSubmit}>
-          <label className={styles.title} htmlFor='search' onClick={props.onToggle}>Test Words</label>
-          <input id='search' type='text' value={search} onChange={(e) => setSearch(e.target.value)}/>
-          <button type='submit'>Add</button>
+          <label className={styles.title} htmlFor='input' onClick={props.onToggle}>
+            Test Words
+          </label>
+          <input id='input' type='text' value={input} onChange={(e) => setInput(e.target.value)}/>
+          <button className='margin-left-4' type='submit'>Add</button>
         </form>
         <div className={styles.wordsWrap}>
+          {/* display once for inactive, once for active */}
           { props.isOpen && testDefs.map((def) => 
-            (<TestWord 
-              def={def}
-              onComplete={handleComplete}/>)) }
+            (<TestWord def={def} onComplete={handleComplete}/>)) }
           </div>
       </div>
     </div>
