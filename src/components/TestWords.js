@@ -20,7 +20,7 @@ function TestWords(props) {
         setTestDefs(defs);
       }
     } else {
-      if(window.localStorage) {
+      if (window.localStorage) {
         window.localStorage.setItem('_testDefs', JSON.stringify(testDefs));
       }
     }
@@ -42,15 +42,15 @@ function TestWords(props) {
     e.preventDefault();
     setAdd(input);
     setInput('');
-  }
+  };
 
   const handleActivate = (word, isActive) => {
     setActiveWord(isActive ? word : undefined);
-  }
+  };
 
   const handleComplete = (word) => {
     console.log('COMPLETE', word);
-  }
+  };
 
   return (
     <div className='testWords'>
@@ -63,26 +63,28 @@ function TestWords(props) {
           <button className='margin-left-4' type='submit'>Add</button>
         </form>
         <div className={styles.inactiveWords}>
-          { props.isOpen && testDefs.filter((d) => d.word !== activeWord).map((def) => 
-            (<TestWord 
-              def={def} 
+          { props.isOpen && testDefs.filter((d) => d.word !== activeWord).map((def) =>
+            (<TestWord
+              key={def.word}
+              def={def}
               isActive={def.word === activeWord}
               onActivate={handleActivate}
               onComplete={handleComplete}/>
             ))}
         </div>
         <div className={styles.activeWord}>
-          { props.isOpen && testDefs.filter((d) => d.word === activeWord).map((def) => 
-            (<TestWord 
-              def={def} 
-              isActive={def.word === activeWord}
-              onActivate={handleActivate}
-              onComplete={handleComplete}/>
-            ))}
+          { props.isOpen && testDefs.filter((d) => d.word === activeWord).map((def) =>
+              (<TestWord
+                key={def.word}
+                def={def}
+                isActive={def.word === activeWord}
+                onActivate={handleActivate}
+                onComplete={handleComplete}/>
+              ))}
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 TestWords.propTypes = {

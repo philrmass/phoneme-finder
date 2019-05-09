@@ -9,52 +9,51 @@ function WordDisplay(props) {
   const classes = (props.isActive ? ' ' + styles.active : '') + (isComplete ? ' ' + styles.complete : '');
 
   const handleDoubleClick = (e) => {
-    if(isComplete) {
+    if (isComplete) {
       props.onComplete(props.def.word);
     }
-    if(props.isActive) {
+    if (props.isActive) {
       setShownCount(0);
     }
     props.onActivate(props.def.word, !props.isActive);
-  }
+  };
 
   const handleDragOver = (e) => {
     if (props.isActive && !isComplete) {
       e.stopPropagation();
       e.preventDefault();
     }
-  }
+  };
 
   const handleDrop = (e) => {
     e.stopPropagation();
     e.preventDefault();
     const dropPhoneme = e.dataTransfer.getData('text');
     if (props.isActive && !isComplete &&
-      (dropPhoneme === props.def.phonemes[shownCount]))
-    {
+      (dropPhoneme === props.def.phonemes[shownCount])) {
       setShownCount(shownCount + 1);
     }
-  }
+  };
 
   return (
     <React.Fragment>
       { props.def && (
-        <div 
+        <div
           className={styles.testWord + classes}
           onMouseDown={(e) => e.preventDefault()}
           onDoubleClick={handleDoubleClick}
           onDragOver={handleDragOver}
           onDrop={handleDrop}>
-        <div className={styles.word}>
-          {props.def.word}
+          <div className={styles.word}>
+            {props.def.word}
+          </div>
+          <div className={styles.phonemeWrap + classes}>
+            { props.def.phonemes.map((phoneme, index) => (
+              (index < shownCount) &&
+              <PhonemeDisplay phoneme={phoneme} />
+            ))}
+          </div>
         </div>
-        <div className={styles.phonemeWrap + classes}>
-          { props.def.phonemes.map((phoneme, index) => (
-            (index < shownCount) && 
-            <PhonemeDisplay phoneme={phoneme} />
-          ))}
-        </div>
-      </div>
       )}
     </React.Fragment>
   );

@@ -1,0 +1,120 @@
+{
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true
+  },
+  "parser": "babel-eslint",
+  "rules": {
+    "array-bracket-spacing": [
+      1,
+      "never",
+      {
+        "objectsInArrays": false
+      }
+    ],
+    "arrow-parens": 1,
+    "block-scoped-var": 1,
+    "block-spacing": 1,
+    "brace-style": 1,
+    "comma-dangle": [
+      1,
+      "always-multiline"
+    ],
+    "comma-spacing": 1,
+    "comma-style": 1,
+    "curly": 2,
+    "dot-notation": 2,
+    "eqeqeq": [
+      2,
+      "smart"
+    ],
+    "func-call-spacing": 1,
+    "jsx-quotes": [
+      1,
+      "prefer-single"
+    ],
+    "key-spacing": 1,
+    "keyword-spacing": 1,
+    "max-len": [
+      1,
+      {
+        "code": 120
+      }
+    ],
+    "multiline-ternary": [
+      1,
+      "never"
+    ],
+    "no-console": 1,
+    "no-else-return": 1,
+    "no-eval": 2,
+    "no-extra-bind": 1,
+    "no-implicit-coercion": 1,
+    "no-implied-eval": 2,
+    "no-irregular-whitespace": 1,
+    "no-multi-spaces": 1,
+    "no-redeclare": 2,
+    "no-return-assign": 2,
+    "no-script-url": 2,
+    "no-sequences": 1,
+    "no-trailing-spaces": 1,
+    "no-unexpected-multiline": 1,
+    "no-useless-return": 1,
+    "one-var-declaration-per-line": 1,
+    "one-var": [
+      2,
+      "never"
+    ],
+    "operator-linebreak": 1,
+    "quote-props": [
+      1,
+      "as-needed"
+    ],
+    "quotes": [
+      1,
+      "single",
+      {
+        "avoidEscape": true
+      }
+    ],
+    "radix": 2,
+    "react/jsx-indent": [
+      2,
+      2
+    ],
+    "react/jsx-key": 2,
+    "react/jsx-no-target-blank": 2,
+    "react/jsx-pascal-case": 1,
+    "react/jsx-uses-react": 2,
+    "react/jsx-uses-vars": 2,
+    "react/jsx-wrap-multilines": 1,
+    "react/no-array-index-key": 1,
+    "react/no-danger": 2,
+    "react/no-deprecated": 2,
+    "react/no-did-mount-set-state": 2,
+    "react/no-did-update-set-state": 1,
+    "react/no-direct-mutation-state": 2,
+    "react/no-find-dom-node": 1,
+    "react/no-string-refs": 2,
+    "react/prop-types": 1,
+    "react/react-in-jsx-scope": 2,
+    "react/sort-comp": 1,
+    "require-await": 2,
+    "semi-spacing": 1,
+    "semi": [
+      1,
+      "always"
+    ],
+    "space-before-blocks": 1,
+    "space-in-parens": 1,
+    "space-infix-ops": 1,
+    "strict": [
+      2,
+      "never"
+    ]
+  },
+  "plugins": [
+    "react"
+  ]
+}
