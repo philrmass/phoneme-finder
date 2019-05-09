@@ -31,7 +31,6 @@ function TestWords(props) {
       props.decoder.decodePhrase(add).then((decoded) => {
         Promise.all(decoded).then((defs) => {
           setTestDefs([...testDefs, ...defs]);
-          console.log('ADD', defs);
         });
       });
       setAdd('');
@@ -46,7 +45,6 @@ function TestWords(props) {
   }
 
   const handleActivate = (word, isActive) => {
-    console.log('ACTIVE', word, isActive);
     setActiveWord(isActive ? word : undefined);
   }
 
@@ -64,14 +62,24 @@ function TestWords(props) {
           <input id='input' type='text' value={input} onChange={(e) => setInput(e.target.value)}/>
           <button className='margin-left-4' type='submit'>Add</button>
         </form>
-        <div className={styles.wordsWrap}>
-          { props.isOpen && testDefs.map((def) => 
+        <div className={styles.inactiveWords}>
+          { props.isOpen && testDefs.filter((d) => d.word !== activeWord).map((def) => 
             (<TestWord 
               def={def} 
               isActive={def.word === activeWord}
               onActivate={handleActivate}
-              onComplete={handleComplete}/>)) }
-          </div>
+              onComplete={handleComplete}/>
+            ))}
+        </div>
+        <div className={styles.activeWord}>
+          { props.isOpen && testDefs.filter((d) => d.word === activeWord).map((def) => 
+            (<TestWord 
+              def={def} 
+              isActive={def.word === activeWord}
+              onActivate={handleActivate}
+              onComplete={handleComplete}/>
+            ))}
+        </div>
       </div>
     </div>
   )
