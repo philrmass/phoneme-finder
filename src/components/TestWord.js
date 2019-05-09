@@ -4,22 +4,22 @@ import PhonemeDisplay from './PhonemeDisplay';
 import styles from '../styles/TestWord.module.css';
 
 function WordDisplay(props) {
-  const [isActive, setIsActive] = useState(false);
   const [shownCount, setShownCount] = useState(0);
+  const isComplete = props.isActive && (shownCount === props.def.phonemes.length);
+  const classes = (props.isActive ? ' ' + styles.active : '') + (isComplete ? ' ' + styles.complete : '');
 
   const handleDoubleClick = (e) => {
-    setIsActive(!isActive);
-    if(!isActive) {
+    if(isComplete) {
+      props.onComplete(props.def.word);
+    }
+    if(props.isActive) {
       setShownCount(0);
     }
-    if (shownCount === props.def.phonemes.length) {
-      props.onComplete(props.def.word);
-      setIsActive(false);
-    }
+    props.onActivate(props.def.word, !props.isActive);
   }
 
   const handleDragOver = (e) => {
-    if (isActive && (shownCount < props.def.phonemes.length)) {
+    if (props.isActive && !isComplete) {
       e.stopPropagation();
       e.preventDefault();
     }
@@ -29,23 +29,18 @@ function WordDisplay(props) {
     e.stopPropagation();
     e.preventDefault();
     const dropPhoneme = e.dataTransfer.getData('text');
-    if (isActive && 
-      (shownCount < props.def.phonemes.length) &&
+    if (props.isActive && !isComplete &&
       (dropPhoneme === props.def.phonemes[shownCount]))
     {
       setShownCount(shownCount + 1);
     }
   }
 
-  let classes = styles.testWord;
-  classes += isActive ? (' ' + styles.active) : '';
-  classes += (isActive && (shownCount === props.def.phonemes.length)) ? (' ' + styles.complete) : '';
-
   return (
     <React.Fragment>
       { props.def && (
         <div 
-          className={classes}
+          className={styles.testWord + classes}
           onMouseDown={(e) => e.preventDefault()}
           onDoubleClick={handleDoubleClick}
           onDragOver={handleDragOver}
@@ -53,7 +48,7 @@ function WordDisplay(props) {
         <div className={styles.word}>
           {props.def.word}
         </div>
-        <div className={`${styles.phonemeWrap} ${isActive ? styles.active : ''}`}>
+        <div className={styles.phonemeWrap + classes}>
           { props.def.phonemes.map((phoneme, index) => (
             (index < shownCount) && 
             <PhonemeDisplay phoneme={phoneme} />
@@ -67,7 +62,9 @@ function WordDisplay(props) {
 
 WordDisplay.propTypes = {
   def: PropTypes.object,
-  onComplete: PropTypes.func
+  isActive: PropTypes.bool,
+  onActivate: PropTypes.func,
+  onComplete: PropTypes.func,
 };
 
 export default WordDisplay;

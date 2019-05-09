@@ -7,6 +7,7 @@ function TestWords(props) {
   const [input, setInput] = useState('');
   const [add, setAdd] = useState('');
   const [testDefs, setTestDefs] = useState([]);
+  const [activeWord, setActiveWord] = useState();
 
   useEffect(() => {
     if (testDefs.length === 0) {
@@ -44,8 +45,13 @@ function TestWords(props) {
     setInput('');
   }
 
+  const handleActivate = (word, isActive) => {
+    console.log('ACTIVE', word, isActive);
+    setActiveWord(isActive ? word : undefined);
+  }
+
   const handleComplete = (word) => {
-    console.log('complete', word);
+    console.log('COMPLETE', word);
   }
 
   return (
@@ -59,9 +65,12 @@ function TestWords(props) {
           <button className='margin-left-4' type='submit'>Add</button>
         </form>
         <div className={styles.wordsWrap}>
-          {/* display once for inactive, once for active */}
           { props.isOpen && testDefs.map((def) => 
-            (<TestWord def={def} onComplete={handleComplete}/>)) }
+            (<TestWord 
+              def={def} 
+              isActive={def.word === activeWord}
+              onActivate={handleActivate}
+              onComplete={handleComplete}/>)) }
           </div>
       </div>
     </div>
