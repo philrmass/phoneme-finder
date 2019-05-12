@@ -10,7 +10,7 @@ function WordDisplay(props) {
 
   const handleDoubleClick = (e) => {
     if (isComplete) {
-      props.onComplete(props.def.word);
+      props.onComplete(props.def);
     }
     if (props.isActive) {
       setShownCount(0);

@@ -4,16 +4,17 @@ import { layout, phonemes, words } from '../lib/phonemes.js';
 import PhonemeDisplay from './PhonemeDisplay';
 import PhraseDisplay from './PhraseDisplay';
 import WordDisplay from './WordDisplay';
-import styles from '../styles/PhonemeReference.module.css';
+import styles from '../styles/Reference.module.css';
 
-function PhonemeReference(props) {
+function Reference(props) {
+  const [isOpen, setIsOpen] = useState(true);
   const [input, setInput] = useState('');
   const [search, setSearch] = useState('');
   const [searchDefs, setSearchDefs] = useState([]);
   const [referenceDefs, setReferenceDefs] = useState({});
 
   useEffect(() => {
-    if(search) {
+    if (search) {
       props.decoder.decodePhrase(search).then((decoded) => {
         Promise.all(decoded).then((defs) => {
           setSearchDefs(defs);
@@ -28,12 +29,12 @@ function PhonemeReference(props) {
     e.preventDefault();
     setSearch(input);
     setInput('');
-  }
+  };
 
   const handleClear = (e) => {
     e.preventDefault();
     setSearch('');
-  }
+  };
 
   useEffect(() => {
     const phrase = Object.values(words).join(' ');
@@ -82,7 +83,10 @@ function PhonemeReference(props) {
     <div className='phonemeReference'>
       <div className={styles.phonemeReference}>
         <form onSubmit={onSubmit}>
-          <label className={styles.title} htmlFor='search' onClick={props.onToggle}>
+          <label
+            className={styles.title}
+            htmlFor='search'
+            onClick={() => setIsOpen(!isOpen)}>
             Phoneme Reference
           </label>
           <input id='search' type='text' value={input} onChange={(e) => setInput(e.target.value)}/>
@@ -93,17 +97,15 @@ function PhonemeReference(props) {
           <PhraseDisplay defs={searchDefs}/>
         </div>
         <div className={styles.columns}>
-          { props.isOpen && layout.map((column) => phonemeColumn(column, referenceDefs)) }
+          { isOpen && layout.map((column) => phonemeColumn(column, referenceDefs)) }
         </div>
       </div>
     </div>
   );
 }
 
-PhonemeReference.propTypes = {
+Reference.propTypes = {
   decoder: PropTypes.object,
-  isOpen: PropTypes.bool,
-  onToggle: PropTypes.func,
 };
 
-export default PhonemeReference;
+export default Reference;

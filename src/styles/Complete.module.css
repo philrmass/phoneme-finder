@@ -1,0 +1,17 @@
+.complete {
+  border: 1px solid #b0b0b0;
+  border-radius: 0.2em;
+  padding: 4px;
+}
+
+.title {
+  margin-right: 8px;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.subtitle {
+  font-size: 1.1em;
+  font-weight: bold;
+  color: var(--mid-text-color);
+}

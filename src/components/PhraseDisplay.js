@@ -6,7 +6,7 @@ function PhraseDisplay(props) {
   return (
     <React.Fragment>
       {props.defs.map((def) => (
-        <WordDisplay def={def} />
+        <WordDisplay key={def.word} def={def} />
       ))}
     </React.Fragment>
   );
