@@ -11,11 +11,14 @@ function Test(props) {
 
   useEffect(() => {
     if (add) {
-      props.decoder.decodePhrase(add).then((decoded) => {
+      console.log('ADD', add, props.decodePhrase(add));
+      /*
+      props.decodePhrase(add).then((decoded) => {
         Promise.all(decoded).then((defs) => {
           props.addTest(defs);
         });
       });
+      */
       setAdd('');
       document.getElementById('input').focus();
     }
@@ -70,7 +73,7 @@ function Test(props) {
 
 Test.propTypes = {
   defs: PropTypes.arrayOf(PropTypes.object),
-  decoder: PropTypes.object,
+  decodePhrase: PropTypes.func,
   addTest: PropTypes.func,
   addComplete: PropTypes.func,
 };

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import PhraseDisplay from './PhraseDisplay';
 import styles from '../styles/Complete.module.css';
@@ -9,8 +9,8 @@ function Complete(props) {
   return (
     <div className='complete'>
       <div className={styles.complete}>
-        <div 
-          className={styles.title} 
+        <div
+          className={styles.title}
           onClick={() => setIsOpen(!isOpen)}>
           Complete Words
         </div>

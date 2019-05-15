@@ -1,3 +1,16 @@
+function decoder(decoded) {
+  function decodePhrase(phrase) {
+    console.log('DECODE', phrase, decoded);
+    return [];
+  }
+
+  return {
+    decodePhrase,
+  };
+};
+
+export default decoder;
+/*
 class Decoder {
   static removeTrailingDigit(text) {
     return (/\d$/.test(text) ? text.slice(0, -1) : text);
@@ -58,3 +71,4 @@ class Decoder {
 }
 
 export default Decoder;
+*/
