@@ -11,14 +11,10 @@ function Test(props) {
 
   useEffect(() => {
     if (add) {
-      console.log('ADD', add, props.decodePhrase(add));
-      /*
       props.decodePhrase(add).then((decoded) => {
-        Promise.all(decoded).then((defs) => {
-          props.addTest(defs);
-        });
+        console.log('ADD_DECODED', decoded);
+        //props.addTest(defs);
       });
-      */
       setAdd('');
       document.getElementById('input').focus();
     }

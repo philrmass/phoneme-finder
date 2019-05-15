@@ -98,7 +98,7 @@ function App(props) {
   };
 
   const addTest = (defs) => {
-    console.log('ADD_TEST');
+    console.log('ADD_TEST', defs);
     //setTestDefs([...defs, ...testDefs]);
   };
 

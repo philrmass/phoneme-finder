@@ -1,7 +1,37 @@
-function decoder(decoded, setDecoded) {
-  function decodePhrase(phrase) {
-    console.log('DECODE', phrase, decoded, setDecoded);
+function decoder(decodedData, setDecodedData) {
+  function removePunctuation(text) {
+    return text.replace(/[.,!?]/g, '');
+  }
+
+  async function queryWord(word) {
+    return 'FAKE';
+  };
+
+  async function decodePhrase(phrase) {
+    const words = removePunctuation(phrase.toLowerCase()).split(' ');
+    const decodeds = words.map(async (word) => {
+      let decoded = decodedData[word];
+      console.log('DEC', word,  decoded);
+      if(!decoded) {
+        decoded = await queryWord(word);
+      }
+      return decoded;
+    });
+    Promise.all(decodeds).then((values) => {
+      console.log('DECODE', '\n', phrase, '\n', words, '\n', decodeds, '\n', values);
+      console.log('DATA', '\n', decodedData);
+    });
     return [];
+    /*
+    return words.map(async (word) => {
+      let decoded = this.checkCache(word);
+      if(!decoded) {
+        decoded = await Decoder.queryWord(word);
+        this.addToCache(decoded);
+      }
+      return decoded;
+    });
+  */
   }
 
   return {
@@ -14,10 +44,6 @@ export default decoder;
 class Decoder {
   static removeTrailingDigit(text) {
     return (/\d$/.test(text) ? text.slice(0, -1) : text);
-  }
-
-  static removePunctuation(text) {
-    return text.replace(/[.,!?]/g, '');
   }
 
   static afterColon(text) {
@@ -54,7 +80,7 @@ class Decoder {
     const url = `https://api.datamuse.com/words?sp=${word.toLowerCase()}&md=r+d&ipa=1&max=1`;
     const response = await fetch(url);
     const definition = await response.json();
-    return Decoder.definitionToDecoded(definition);
+    return definitionToDecoded(definition);
   }
 
   async decodePhrase(phrase) {
