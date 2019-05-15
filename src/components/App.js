@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import decodedInitial from '../data/decoded.json';
+import React, { useEffect, useState } from 'react';
+import decodedData from '../data/decoded.json';
 import decoder from '../lib/decoder';
 //import Common from './Common';
 //import Complete from './Complete';
@@ -7,16 +7,33 @@ import decoder from '../lib/decoder';
 import Test from './Test';
 import styles from '../styles/App.module.css';
 
+function useLocalStorage(key, initialValue) {
+  const [value, setValue] = useState(() => {
+    const localValue = localStorage.getItem(key);
+    if (localValue) {
+      return JSON.parse(localValue);
+    }
+    return initialValue;
+  });
+
+  function setLocalValue(localValue) {
+    setValue(localValue);
+    localStorage.setItem(key, JSON.stringify(localValue));
+  };
+
+  return [value, setLocalValue];
+}
+
 function App(props) {
   //const decoded = { greeting: 'hello' };
-  const decodePhrase = decoder(decodedInitial).decodePhrase;
+  const [decoded, setDecoded] = useLocalStorage('decoded', decodedData);
+  const decodePhrase = decoder(decoded, setDecoded).decodePhrase;
   //const [completeDefs, setCompleteDefs] = useState([]);
   //const [commonDefs, setCommonDefs] = useState([]);
   //const [testDefs, setTestDefs] = useState([]);
   //const [decoder] = useState(new Decoder());
 
   useEffect(() => {
-    console.log('START', decodePhrase);
   }, []);
   /*
   const key = 'testDefs';

@@ -1,6 +1,6 @@
-function decoder(decoded) {
+function decoder(decoded, setDecoded) {
   function decodePhrase(phrase) {
-    console.log('DECODE', phrase, decoded);
+    console.log('DECODE', phrase, decoded, setDecoded);
     return [];
   }
 
