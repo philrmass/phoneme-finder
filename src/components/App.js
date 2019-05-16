@@ -7,6 +7,7 @@ import decoder from '../lib/decoder';
 import Test from './Test';
 import styles from '../styles/App.module.css';
 
+//??? move to another file
 function useLocalStorage(key, initialValue) {
   const [value, setValue] = useState(() => {
     const localValue = localStorage.getItem(key);
