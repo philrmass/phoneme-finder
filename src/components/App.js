@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import commonData from '../data/commonShort';
 import decodedData from '../data/decoded.json';
+import { useLocalStorage } from '../lib/storage';
 import decoder from '../lib/decoder';
 //import Common from './Common';
 //import Complete from './Complete';
@@ -7,99 +9,33 @@ import decoder from '../lib/decoder';
 import Test from './Test';
 import styles from '../styles/App.module.css';
 
-//??? move to another file
-function useLocalStorage(key, initialValue) {
-  const [value, setValue] = useState(() => {
-    const localValue = localStorage.getItem(key);
-    if (localValue) {
-      return JSON.parse(localValue);
-    }
-    return initialValue;
-  });
-
-  function setLocalValue(localValue) {
-    setValue(localValue);
-    localStorage.setItem(key, JSON.stringify(localValue));
-  };
-
-  return [value, setLocalValue];
-}
-
 function App(props) {
-  //const decoded = { greeting: 'hello' };
+  const [saveUrl, setSaveUrl] = useState(undefined);
+  const [test, setTest] = useLocalStorage('test', []);
+  const [complete, setComplete] = useLocalStorage('complete', []);
   const [decoded, setDecoded] = useLocalStorage('decoded', decodedData);
   const decodePhrase = decoder(decoded, setDecoded).decodePhrase;
-  //const [completeDefs, setCompleteDefs] = useState([]);
-  //const [commonDefs, setCommonDefs] = useState([]);
-  //const [testDefs, setTestDefs] = useState([]);
-  //const [decoder] = useState(new Decoder());
-
-  useEffect(() => {
-  }, []);
-  /*
-  const key = 'testDefs';
-  const initialValue = [];
-  useEffect(() => {
-    const value = localStorage.getItem(key);
-    console.log('GET', value, localStorage.length);
-    */
-    /*
-    for(const i in localStorage) {
-      console.log('  ', i);
-    }
-    */
-  //});
-  /*
-  useEffect(() => {
-    const [value, setValue] = useState(initialValue);
-    const keyValue = localStorage.getItem(key);
-    console.log('get', keyValue, typeof(keyValue));
-  });
-  */
-  /*
-  useEffect(() => {
-    if (testDefs.length === 0) {
-      const defString = window.localStorage && window.localStorage.getItem('_testDefs');
-      let defs;
-      if (defString) {
-        defs = JSON.parse(defString);
-      }
-      if (Array.isArray(defs)) {
-        setTestDefs(defs);
-      }
-    } else {
-      if (window.localStorage) {
-        window.localStorage.setItem('_testDefs', JSON.stringify(testDefs));
-      }
-    }
-  }, [testDefs]);
-  */
-
-  /*
-  useEffect(() => {
-    if (completeDefs.length === 0) {
-      const defString = window.localStorage && window.localStorage.getItem('_completeDefs');
-      let defs;
-      if (defString) {
-        defs = JSON.parse(defString);
-      }
-      if (Array.isArray(defs)) {
-        setCompleteDefs(defs);
-      }
-    } else {
-      if (window.localStorage) {
-        window.localStorage.setItem('_completeDefs', JSON.stringify(completeDefs));
-      }
-    }
-  }, [completeDefs]);
-  */
+  const commonWords = commonData.map((c) => c.word);
+  //??? store common index in local storage
+  //??? get common (defs) up to the index
+  //??? add setInterval to query more
 
   const save = () => {
-    console.log('SAVE');
+    const testWords = test.map((t) => t.word);
+    const completeWords = complete.map((c) => c.word);
+    const data = {
+      decoded,
+      test: testWords,
+      complete: completeWords,
+    };
+    console.log('SAVE', data);
+    const file = new File([JSON.stringify(data)], '');
+    setSaveUrl(window.URL.createObjectURL(file));
   };
 
   const addTest = (defs) => {
     console.log('ADD_TEST', defs);
+    //??? restore this and display
     //setTestDefs([...defs, ...testDefs]);
   };
 
@@ -113,6 +49,9 @@ function App(props) {
     <React.Fragment>
       <header class={styles.header}>
         <h1>Phoneme Finder</h1>
+        { saveUrl &&
+        <a href={saveUrl} download='phonmeFinder.json'>Download</a>
+        }
         <button onClick={save}>Save</button>
       </header>
       <main>

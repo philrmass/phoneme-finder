@@ -39,12 +39,16 @@ function decoder(decodedData, setDecodedData) {
       let decoded = decodedData[word];
       if (!decoded) {
         decoded = await queryWord(word);
+        //??? store word in queried array here
         setDecodedData({ ...decodedData, [decoded.word]: decoded });
       }
       return decoded;
     });
     return await Promise.all(decodeds);
+    //??? convert queried to queriedData
+    //??? add all queriedData to decodedData with setDecodedData after promise all
   }
+
   return {
     decodePhrase,
   };
