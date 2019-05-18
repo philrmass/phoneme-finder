@@ -26,5 +26,5 @@ yarn-error.log*
 # temp
 _*.js
 _*.json
-_*.text
+_*.txt
 _*.ods

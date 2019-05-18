@@ -44,13 +44,28 @@ function WordDisplay(props) {
           onDoubleClick={handleDoubleClick}
           onDragOver={handleDragOver}
           onDrop={handleDrop}>
-          <div className={styles.word}>
-            {props.def.word}
+          <div className={styles.topRow}>
+            <div className={styles.word}>
+              {props.def.word}
+            </div>
+            { props.isActive &&
+            <button
+              className={styles.button}
+              onClick={() => props.onRemove(props.def)}>
+              {isComplete ? '^' : 'X'}
+              { /*??? add buttonIcon(isComplete), make x and checkmark */}
+              <svg width='100%' height='100%' viewBox='0 0 100 100'>
+                <polygon points='5,95 95,95 50,5' strokeWidth='5%' stroke='1' fill='red' />)
+              </svg>
+            </button>
+            }
           </div>
           <div className={styles.phonemeWrap + classes}>
             { props.def.phonemes.map((phoneme, index) => (
               (index < shownCount) &&
-              <PhonemeDisplay phoneme={phoneme} />
+              <PhonemeDisplay
+                key={phoneme}
+                phoneme={phoneme} />
             ))}
           </div>
         </div>
@@ -63,6 +78,7 @@ WordDisplay.propTypes = {
   def: PropTypes.object,
   isActive: PropTypes.bool,
   onActivate: PropTypes.func,
+  onRemove: PropTypes.func,
   onComplete: PropTypes.func,
 };
 

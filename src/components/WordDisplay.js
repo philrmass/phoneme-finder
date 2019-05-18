@@ -12,8 +12,10 @@ function WordDisplay(props) {
           {props.def.word}
         </div>
         <div className={styles.phonemeWrap}>
-          {props.def.phonemes.map((phoneme) => (
-            <PhonemeDisplay phoneme={phoneme} />
+          {props.def.phonemes.map((phoneme, index) => (
+            <PhonemeDisplay
+              key={`${props.def.word}:${phoneme}:${index}`}
+              phoneme={phoneme}/>
           ))}
         </div>
       </div>
@@ -23,7 +25,7 @@ function WordDisplay(props) {
 }
 
 WordDisplay.propTypes = {
-  def: PropTypes.object
+  def: PropTypes.object,
 };
 
 export default WordDisplay;

@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import commonData from '../data/commonShort';
+import React, { useState } from 'react';
+import commonData from '../data/_commonShort';
 import decodedData from '../data/decoded.json';
 import { useLocalStorage } from '../lib/storage';
 import decoder from '../lib/decoder';
 //import Common from './Common';
 //import Complete from './Complete';
-//import Reference from './Reference';
+import Reference from './Reference';
 import Test from './Test';
 import styles from '../styles/App.module.css';
 
@@ -38,14 +38,20 @@ function App(props) {
   };
 
   const addComplete = (def) => {
-    console.log('ADD_COMPLETE');
+    //??? implement
+    console.log('ADD_COMPLETE', def.word);
     //setTestDefs(testDefs.filter((td) => td !== def));
     //setCompleteDefs([def, ...completeDefs.filter((cd) => cd.word !== def.word)]);
   };
 
+  const removeComplete = (def) => {
+    //??? implement
+    console.log('REMOVE_COMPLETE', def.word);
+  };
+
   return (
     <React.Fragment>
-      <header class={styles.header}>
+      <header className={styles.header}>
         <h1>Phoneme Finder</h1>
         { saveUrl &&
         <a href={saveUrl} download='phonmeFinder.json'>Download</a>
@@ -57,9 +63,10 @@ function App(props) {
           defs={test}
           decodePhrase={decodePhrase}
           addTest={addTest}
+          removeComplete={removeComplete}
           addComplete={addComplete}/>
+        <Reference decodePhrase={decodePhrase}/>
         {/*
-        <Reference decoder={decoder}/>
         <Complete defs={completeDefs}/>
         <Common defs={commonDefs}/>
         */}

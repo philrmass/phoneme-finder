@@ -58,6 +58,7 @@ function Test(props) {
                 def={def}
                 isActive={def.word === activeWord}
                 onActivate={handleActivate}
+                onRemove={props.removeComplete}
                 onComplete={props.addComplete}/>
               ))}
         </div>
@@ -70,6 +71,7 @@ Test.propTypes = {
   defs: PropTypes.arrayOf(PropTypes.object),
   decodePhrase: PropTypes.func,
   addTest: PropTypes.func,
+  removeComplete: PropTypes.func,
   addComplete: PropTypes.func,
 };
 

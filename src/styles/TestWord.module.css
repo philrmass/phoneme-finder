@@ -10,6 +10,16 @@
   font-size: 2.0em;
 }
 
+.topRow {
+  display: flex;
+  justify-content: space-between;
+}
+
+.button {
+  align-self: flex-start;
+  margin-left: 8px;
+}
+
 .word {
   font-size: 2.5em;
 }

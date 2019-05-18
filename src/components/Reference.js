@@ -15,10 +15,8 @@ function Reference(props) {
 
   useEffect(() => {
     if (search) {
-      props.decoder.decodePhrase(search).then((decoded) => {
-        Promise.all(decoded).then((defs) => {
-          setSearchDefs(defs);
-        });
+      props.decodePhrase(search).then((decoded) => {
+        setSearchDefs(decoded);
       });
     } else {
       setSearchDefs([]);
@@ -38,18 +36,16 @@ function Reference(props) {
 
   useEffect(() => {
     const phrase = Object.values(words).join(' ');
-    props.decoder.decodePhrase(phrase).then((decoded) => {
-      Promise.all(decoded).then((values) => {
-        setReferenceDefs(values.reduce((dict, def) => {
+    props.decodePhrase(phrase).then((decoded) => {
+        setReferenceDefs(decoded.reduce((dict, def) => {
           return { ...dict, [def.word]: def };
         }, {}));
-      });
     });
   }, []);
 
   function phonemeKey(phoneme, def) {
     return (
-      <React.Fragment>
+      <React.Fragment key={phoneme}>
         <div className={styles.phonemeKey}>
           <span className={styles.phoneme}>
             <PhonemeDisplay phoneme={phoneme}/>
@@ -62,7 +58,7 @@ function Reference(props) {
 
   function phonemeGroup(group, defs) {
     return (
-      <React.Fragment>
+      <React.Fragment key={group}>
         <div className={styles.groupName}>{group}</div>
         <div className={styles.group}>
           {phonemes[group].map((phoneme) => phonemeKey(phoneme, defs[words[phoneme]]))}
@@ -73,7 +69,7 @@ function Reference(props) {
 
   function phonemeColumn(column, defs) {
     return (
-      <div className={styles.column}>
+      <div key={column} className={styles.column}>
         {column.map((group) => phonemeGroup(group, defs))}
       </div>
     );
@@ -105,7 +101,7 @@ function Reference(props) {
 }
 
 Reference.propTypes = {
-  decoder: PropTypes.object,
+  decodePhrase: PropTypes.func,
 };
 
 export default Reference;
