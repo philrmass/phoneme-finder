@@ -12,8 +12,7 @@ function Test(props) {
   useEffect(() => {
     if (add) {
       props.decodePhrase(add).then((decoded) => {
-        console.log('ADD_DECODED', decoded);
-        //props.addTest(defs);
+        props.addTest(decoded);
       });
       setAdd('');
       document.getElementById('input').focus();

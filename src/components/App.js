@@ -34,9 +34,7 @@ function App(props) {
   };
 
   const addTest = (defs) => {
-    console.log('ADD_TEST', defs);
-    //??? restore this and display
-    //setTestDefs([...defs, ...testDefs]);
+    setTest([...defs, ...test]);
   };
 
   const addComplete = (def) => {
@@ -56,7 +54,7 @@ function App(props) {
       </header>
       <main>
         <Test
-          defs={[]}
+          defs={test}
           decodePhrase={decodePhrase}
           addTest={addTest}
           addComplete={addComplete}/>

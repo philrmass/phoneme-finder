@@ -35,18 +35,18 @@ function decoder(decodedData, setDecodedData) {
 
   async function decodePhrase(phrase) {
     const words = removePunctuation(phrase.toLowerCase()).split(' ');
+    let queried = {};
     const decodeds = words.map(async (word) => {
       let decoded = decodedData[word];
       if (!decoded) {
         decoded = await queryWord(word);
-        //??? store word in queried array here
-        setDecodedData({ ...decodedData, [decoded.word]: decoded });
+        queried = { ...queried, [decoded.word]: decoded };
       }
       return decoded;
     });
-    return await Promise.all(decodeds);
-    //??? convert queried to queriedData
-    //??? add all queriedData to decodedData with setDecodedData after promise all
+    const defs = await Promise.all(decodeds);
+    setDecodedData({ ...decodedData, ...queried });
+    return defs;
   }
 
   return {
