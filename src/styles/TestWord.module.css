@@ -18,6 +18,9 @@
 .button {
   align-self: flex-start;
   margin-left: 8px;
+  height: 26px;
+  width: 26px;
+  padding: 2px;
 }
 
 .word {

@@ -12,7 +12,7 @@ function Test(props) {
   useEffect(() => {
     if (add) {
       props.decodePhrase(add).then((decoded) => {
-        props.addTest(decoded);
+        props.onAdd(decoded);
       });
       setAdd('');
       document.getElementById('input').focus();
@@ -58,8 +58,8 @@ function Test(props) {
                 def={def}
                 isActive={def.word === activeWord}
                 onActivate={handleActivate}
-                onRemove={props.removeComplete}
-                onComplete={props.addComplete}/>
+                onRemove={props.onRemove}
+                onComplete={props.onComplete}/>
               ))}
         </div>
       </div>
@@ -70,9 +70,9 @@ function Test(props) {
 Test.propTypes = {
   defs: PropTypes.arrayOf(PropTypes.object),
   decodePhrase: PropTypes.func,
-  addTest: PropTypes.func,
-  removeComplete: PropTypes.func,
-  addComplete: PropTypes.func,
+  onAdd: PropTypes.func,
+  onRemove: PropTypes.func,
+  onComplete: PropTypes.func,
 };
 
 export default Test;

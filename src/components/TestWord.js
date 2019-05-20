@@ -35,6 +35,18 @@ function WordDisplay(props) {
     }
   };
 
+  const createButton = (isComplete, { def, onRemove, onComplete }) => {
+    const path = isComplete ? 'M5 50 L 50 95 L 95 5' : 'M5 5 L 95 95 M 5 95 L 95 5';
+    return (
+      <button
+        className={styles.button}
+        onClick={ isComplete ? () => onComplete(def) : () => onRemove(def) }>
+        <svg width='100%' height='100%' viewBox='0 0 100 100'>
+          <path d={path} fill='transparent' stroke='#808080' strokeWidth='10'/>
+        </svg>
+      </button>);
+  };
+
   return (
     <React.Fragment>
       { props.def && (
@@ -49,16 +61,7 @@ function WordDisplay(props) {
               {props.def.word}
             </div>
             { props.isActive &&
-            <button
-              className={styles.button}
-              onClick={() => props.onRemove(props.def)}>
-              {isComplete ? '^' : 'X'}
-              { /*??? add buttonIcon(isComplete), make x and checkmark */}
-              <svg width='100%' height='100%' viewBox='0 0 100 100'>
-                <polygon points='5,95 95,95 50,5' strokeWidth='5%' stroke='1' fill='red' />)
-              </svg>
-            </button>
-            }
+                createButton(isComplete, props) }
           </div>
           <div className={styles.phonemeWrap + classes}>
             { props.def.phonemes.map((phoneme, index) => (

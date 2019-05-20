@@ -15,6 +15,7 @@ function Common(props) {
         </div>
         { isOpen && (
           <React.Fragment>
+            <div className={styles.subtitle}>Phoneme Frequency</div>
             <div>Common Word</div>
           </React.Fragment>
         )}

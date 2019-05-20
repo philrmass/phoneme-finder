@@ -12,10 +12,10 @@ export const phonemes = {
   'Stops' : ['D', 'T', 'G', 'B', 'P', 'K'],
   'Affricates' : ['CH', 'JH'],
   'Nasals' : ['NG', 'M', 'N'],
-  'R-colored vowels' : ['ER'],
-  'Liquids' : ['R', 'L'],
-  'Semivowels' : ['Y', 'W'],
-  'Fricatives' : ['F', 'HH', 'SH', 'V', 'ZH', 'DH', 'TH', 'Z', 'S']
+  'R-colored vowels': ['ER'],
+  'Liquids': ['R', 'L'],
+  'Semivowels': ['Y', 'W'],
+  'Fricatives': ['F', 'HH', 'SH', 'V', 'ZH', 'DH', 'TH', 'Z', 'S']
 };
 
 export const words = {

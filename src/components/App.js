@@ -3,8 +3,8 @@ import commonData from '../data/_commonShort';
 import decodedData from '../data/decoded.json';
 import { useLocalStorage } from '../lib/storage';
 import decoder from '../lib/decoder';
-//import Common from './Common';
-//import Complete from './Complete';
+import Common from './Common';
+import Complete from './Complete';
 import Reference from './Reference';
 import Test from './Test';
 import styles from '../styles/App.module.css';
@@ -16,7 +16,8 @@ function App(props) {
   const [decoded, setDecoded] = useLocalStorage('decoded', decodedData);
   const decodePhrase = decoder(decoded, setDecoded).decodePhrase;
   const commonWords = commonData.map((c) => c.word);
-  //??? store common index in local storage
+  const [common, setCommon] = useState([]);
+  const [commonIndex, setCommonIndex] = useLocalStorage('commonIndex', 0);
   //??? get common (defs) up to the index
   //??? add setInterval to query more
 
@@ -28,25 +29,23 @@ function App(props) {
       test: testWords,
       complete: completeWords,
     };
-    console.log('SAVE', data);
     const file = new File([JSON.stringify(data)], '');
     setSaveUrl(window.URL.createObjectURL(file));
   };
 
+  //??? add load
+
   const addTest = (defs) => {
-    setTest([...defs, ...test]);
+    setTest([...test, ...defs]);
+  };
+
+  const removeTest = (def) => {
+    setTest(test.filter((t) => t.word !== def.word));
   };
 
   const addComplete = (def) => {
-    //??? implement
-    console.log('ADD_COMPLETE', def.word);
-    //setTestDefs(testDefs.filter((td) => td !== def));
-    //setCompleteDefs([def, ...completeDefs.filter((cd) => cd.word !== def.word)]);
-  };
-
-  const removeComplete = (def) => {
-    //??? implement
-    console.log('REMOVE_COMPLETE', def.word);
+    setComplete([def, ...(complete.filter((c) => c.word !== def.word))]);
+    setTest(test.filter((t) => t.word !== def.word));
   };
 
   return (
@@ -62,14 +61,12 @@ function App(props) {
         <Test
           defs={test}
           decodePhrase={decodePhrase}
-          addTest={addTest}
-          removeComplete={removeComplete}
-          addComplete={addComplete}/>
+          onAdd={addTest}
+          onRemove={removeTest}
+          onComplete={addComplete}/>
         <Reference decodePhrase={decodePhrase}/>
-        {/*
-        <Complete defs={completeDefs}/>
-        <Common defs={commonDefs}/>
-        */}
+        <Complete defs={complete}/>
+        <Common defs={common}/>
       </main>
     </React.Fragment>
   );
