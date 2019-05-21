@@ -1,28 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import phonemes from '../data/phonemes.json';
+import { getFrequencies } from '../lib/frequencies';
+import FrequencyGraph from './FrequencyGraph';
 import PhraseDisplay from './PhraseDisplay';
 import styles from '../styles/Complete.module.css';
 
 function Complete(props) {
   const [isOpen, setIsOpen] = useState(true);
   const [frequencyIsOpen, setFrequencyIsOpen] = useState(false);
-  const [frequencies, setFrequencies] = useState({});
+  const [frequencies, setFrequencies] = useState([]);
+  const [frequenciesTotal, setFrequenciesTotal] = useState(0);
 
   useEffect(() => {
     if (frequencyIsOpen) {
-      const zeros = phonemes.reduce((freqs, p) => {
-        return { ...freqs, [p]: 0 };
-      }, {});
-      const frequencies = props.defs.reduce((frequencies, d) => {
-        return d.phonemes.reduce((frequencies, p) => {
-          frequencies[p]++;
-          return frequencies;
-        }, frequencies);
-      }, zeros);
-      const sorted = Object.entries(frequencies).sort((a, b) => b[1] - a[1]);
-      //?? sort, put into an array
-      console.log('FREQ', frequencies, sorted);
+      const [frequencies, total] = getFrequencies(props.defs);
+      setFrequencies(frequencies);
+      setFrequenciesTotal(total);
     }
   }, [frequencyIsOpen, props.defs]);
 
@@ -40,6 +33,11 @@ function Complete(props) {
               className={styles.subtitle}
               onClick={() => setFrequencyIsOpen(!frequencyIsOpen)}>
               Phoneme Frequency
+              { frequencyIsOpen && (
+                <FrequencyGraph
+                  values={frequencies}
+                  total={frequenciesTotal}/>
+              )}
             </div>
             <PhraseDisplay defs={props.defs}/>
           </React.Fragment>
