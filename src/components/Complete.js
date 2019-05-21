@@ -7,7 +7,7 @@ import styles from '../styles/Complete.module.css';
 
 function Complete(props) {
   const [isOpen, setIsOpen] = useState(true);
-  const [frequencyIsOpen, setFrequencyIsOpen] = useState(false);
+  const [frequencyIsOpen, setFrequencyIsOpen] = useState(true);
   const [frequencies, setFrequencies] = useState([]);
   const [frequenciesTotal, setFrequenciesTotal] = useState(0);
 

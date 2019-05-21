@@ -1,0 +1,32 @@
+.graph {
+  display: grid;
+  grid-template-columns: auto auto auto 1fr auto;
+}
+
+.percent {
+  align-self: center;
+  margin: 2px 4px;
+  color: #686868;
+  font-size: 0.85em;
+}
+
+.label {
+  margin: 1px;
+}
+
+.count {
+  align-self: center;
+  margin: 2px 0 2px 4px;
+  color: #888888;
+  font-size: 0.90em;
+}
+
+.bar {
+  margin: 4px 4px;
+  border-radius: 4px;
+  background: #a0a0a0;
+}
+
+.spacer {
+  width: 4px;
+}
