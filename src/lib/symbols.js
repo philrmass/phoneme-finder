@@ -2,6 +2,7 @@ export function phonemeToSymbol(phoneme) {
   return phonemeSymbols[phoneme];
 }
 
+//??? symbols
 export const phonemeSymbols = {
   'AE': { shape: 'circle', color: 'red'},
   'IH': { shape: 'circle', color: 'orange'},
@@ -48,6 +49,7 @@ export function colorToCode(color) {
   return colorCodes[color];
 }
 
+//??? colors
 export const colorCodes = {
   'red': '#ff0000',
   'orange': '#ff8000',

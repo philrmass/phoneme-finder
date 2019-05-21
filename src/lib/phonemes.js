@@ -1,3 +1,4 @@
+//??? groupLayout
 export const layout = [
   ['Monophthongs'],
   ['Diphthongs', 'Nasals'],
@@ -6,6 +7,7 @@ export const layout = [
   ['Liquids', 'R-colored vowels', 'Semivowels'],
 ];
 
+//??? groups
 export const phonemes = {
   'Monophthongs' : ['AE', 'IH', 'AA', 'EH', 'IY', 'UW', 'AH', 'AO', 'UH'],
   'Diphthongs' : ['AW', 'OY', 'AY', 'EY', 'OW'],
@@ -18,6 +20,7 @@ export const phonemes = {
   'Fricatives': ['F', 'HH', 'SH', 'V', 'ZH', 'DH', 'TH', 'Z', 'S']
 };
 
+//??? words 
 export const words = {
   'AO': 'fought',
   'AA': 'lot',
