@@ -1,4 +1,4 @@
-import phonemes from '../data/phonemes.json';
+import phonemes from '../data/phonemes';
 
 export function getFrequencies(defs) {
   const zeros = phonemes.reduce((zeros, p) => {

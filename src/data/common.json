@@ -27,7 +27,7 @@
   { "rank": 26, "word": "from", "type": "i", "freqency": 1635914, "dispersion": 0.99 },
   { "rank": 27, "word": "that", "type": "d", "freqency": 1712406, "dispersion": 0.94 },
   { "rank": 28, "word": "not", "type": "x", "freqency": 1638830, "dispersion": 0.98 },
-  { "rank": 29, "word": "n't", "type": "x", "freqency": 1619007, "dispersion": 0.97 },
+  { "rank": 29, "word": "nt", "type": "x", "freqency": 1619007, "dispersion": 0.97 },
   { "rank": 30, "word": "by", "type": "i", "freqency": 1490548, "dispersion": 0.96 },
   { "rank": 31, "word": "she", "type": "p", "freqency": 1484869, "dispersion": 0.91 },
   { "rank": 32, "word": "or", "type": "c", "freqency": 1379320, "dispersion": 0.97 },

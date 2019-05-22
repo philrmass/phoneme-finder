@@ -9,6 +9,9 @@ import WordDisplay from './WordDisplay';
 import styles from '../styles/Reference.module.css';
 
 function Reference(props) {
+  const phonemes = groups.reduce((phonemes, group) => {
+    return groupPhonemes[group].reduce((phonemes, phoneme) => [...phonemes, phoneme], phonemes);
+  }, []);
   const [isOpen, setIsOpen] = useState(true);
   const [input, setInput] = useState('');
   const [search, setSearch] = useState('');
@@ -58,25 +61,6 @@ function Reference(props) {
     );
   }
 
-  function phonemeGroup(group, defs) {
-    return (
-      <React.Fragment key={group}>
-        <div className={styles.groupName}>{group}</div>
-        <div className={styles.group}>
-          {groupPhonemes[group].map((phoneme) => phonemeKey(phoneme, defs[words[phoneme]]))}
-        </div>
-      </React.Fragment>
-    );
-  }
-
-  function phonemeColumn(column, defs) {
-    return (
-      <div key={column} className={styles.column}>
-        {column.map((group) => phonemeGroup(group, defs))}
-      </div>
-    );
-  }
-
   return (
     <div className='phonemeReference'>
       <div className={styles.phonemeReference}>
@@ -94,8 +78,8 @@ function Reference(props) {
         <div className={styles.searchDisplay}>
           <PhraseDisplay defs={searchDefs}/>
         </div>
-        <div className={styles.columns}>
-          { isOpen && groups.map((column) => phonemeColumn(column, referenceDefs)) }
+        <div className={styles.group}>
+          { phonemes.map((phoneme) => phonemeKey(phoneme, referenceDefs[words[phoneme]])) }
         </div>
       </div>
     </div>

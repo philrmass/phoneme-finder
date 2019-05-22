@@ -14,20 +14,9 @@
   font-size: 2.0em;
 }
 
-.columns {
-  display: flex;
-}
-
-.column {
-  padding-top: 0.5em;
-}
-
-.groupName {
-  color: var(--mid-text-color);
-  font-size: 1.2em;
-}
-
 .group {
+  display: flex;
+  flex-wrap: wrap;
   margin: 0 4px;
 }
 

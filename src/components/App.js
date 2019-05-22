@@ -17,15 +17,12 @@ function App(props) {
   const decodePhrase = decoder(decoded, setDecoded).decodePhrase;
   const commonWords = commonData.map((c) => c.word);
   const [common, setCommon] = useState([]);
-  const [commonIndex, setCommonIndex] = useLocalStorage('commonIndex', 10);
 
   useEffect(() => {
-    const words = commonWords.slice(0, commonIndex).join(' ');
+    const words = commonWords.join(' ');
     decodePhrase(words).then((decoded) => {
-        setCommon([...common, ...decoded]);
+      setCommon(decoded);
     });
-    setCommonIndex(commonIndex + 1);
-    //??? add setInterval to query more
   }, []);
 
   const save = () => {
