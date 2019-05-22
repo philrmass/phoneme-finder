@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { layout, phonemes, words } from '../lib/phonemes.js';
+import groups from '../data/groups';
+import groupPhonemes from '../data/groupPhonemes';
+import words from '../data/words';
 import PhonemeDisplay from './PhonemeDisplay';
 import PhraseDisplay from './PhraseDisplay';
 import WordDisplay from './WordDisplay';
@@ -61,7 +63,7 @@ function Reference(props) {
       <React.Fragment key={group}>
         <div className={styles.groupName}>{group}</div>
         <div className={styles.group}>
-          {phonemes[group].map((phoneme) => phonemeKey(phoneme, defs[words[phoneme]]))}
+          {groupPhonemes[group].map((phoneme) => phonemeKey(phoneme, defs[words[phoneme]]))}
         </div>
       </React.Fragment>
     );
@@ -93,7 +95,7 @@ function Reference(props) {
           <PhraseDisplay defs={searchDefs}/>
         </div>
         <div className={styles.columns}>
-          { isOpen && layout.map((column) => phonemeColumn(column, referenceDefs)) }
+          { isOpen && groups.map((column) => phonemeColumn(column, referenceDefs)) }
         </div>
       </div>
     </div>
