@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { phonemeToSymbol, colorToCode } from '../lib/symbols';
+import colors from '../data/colors';
+import symbols from '../data/symbols';
 import styles from '../styles/PhonemeDisplay.module.css';
 
-function symbol(shape, color) {
+function svgSymbol(shape, color) {
   const stroke = '#404040';
   if (shape === 'circle') {
     return (<circle cx='50%' cy='50%' r='45%' strokeWidth='5%' stroke={stroke} fill={color} />);
@@ -31,8 +32,8 @@ function symbol(shape, color) {
 }
 
 function PhonemeDisplay(props) {
-  const { shape, color } = phonemeToSymbol(props.phoneme);
-  const colorCode = colorToCode(color);
+  const symbol = symbols[props.phoneme];
+  const colorCode = colors[symbol.color];
 
   const handleDragStart = (e) => {
     e.stopPropagation();
@@ -44,7 +45,7 @@ function PhonemeDisplay(props) {
       <div className={styles.symbolWrap}>
         <div className={styles.symbol}>
           <svg width='100%' height='100%' viewBox='0 0 100 100'>
-            {symbol(shape, colorCode)}
+            {svgSymbol(symbol.shape, colorCode)}
           </svg>
         </div>
       </div>

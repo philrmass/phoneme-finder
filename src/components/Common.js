@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import WordDisplay from './WordDisplay';
 import styles from '../styles/Common.module.css';
 
 function Common(props) {
@@ -16,7 +17,18 @@ function Common(props) {
         { isOpen && (
           <React.Fragment>
             <div className={styles.subtitle}>Phoneme Frequency</div>
-            <div>Common Word</div>
+            <div className={styles.words}>
+              { props.defs.map((def, index) => (
+                <React.Fragment key={def.word + index}>
+                  <div>
+                    <div className={styles.count}>{index + 1}</div>
+                    <div className={styles.word}>
+                      <WordDisplay def={def}/>
+                    </div>
+                  </div>
+                </React.Fragment>
+              ))}
+            </div>
           </React.Fragment>
         )}
       </div>

@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import commonData from '../data/_commonShort';
-import decodedData from '../data/decoded.json';
+import React, { useEffect, useState } from 'react';
+import commonData from '../data/common';
+import decodedData from '../data/decoded';
 import { useLocalStorage } from '../lib/storage';
 import decoder from '../lib/decoder';
 import Common from './Common';
@@ -17,9 +17,16 @@ function App(props) {
   const decodePhrase = decoder(decoded, setDecoded).decodePhrase;
   const commonWords = commonData.map((c) => c.word);
   const [common, setCommon] = useState([]);
-  const [commonIndex, setCommonIndex] = useLocalStorage('commonIndex', 0);
-  //??? get common (defs) up to the index
-  //??? add setInterval to query more
+  const [commonIndex, setCommonIndex] = useLocalStorage('commonIndex', 10);
+
+  useEffect(() => {
+    const words = commonWords.slice(0, commonIndex).join(' ');
+    decodePhrase(words).then((decoded) => {
+        setCommon([...common, ...decoded]);
+    });
+    setCommonIndex(commonIndex + 1);
+    //??? add setInterval to query more
+  }, []);
 
   const save = () => {
     const testWords = test.map((t) => t.word);
