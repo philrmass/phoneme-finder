@@ -159,7 +159,7 @@
   "ancestor":{"word":"ancestor","phonemes":["AE","N","S","EH","S","T","ER"],"ipa":"ˈænsɛstɝ"},
   "ancient":{"word":"ancient","phonemes":["EY","N","CH","AH","N","T"],"ipa":"ˈeɪntʃʌnt"},
   "and":{"word":"and","phonemes":["AH","N","D"],"ipa":"ʌnd"},
-  "and/or":{"word":"and/or","phonemes":["AE","N","D","ER"],"ipa":"ˈændɝ"},
+  "andor":{"word":"andor","phonemes":["AE","N","D","ER"],"ipa":"ˈændɝ"},
   "angel":{"word":"angel","phonemes":["EY","N","JH","AH","L"],"ipa":"ˈeɪndʒʌɫ"},
   "anger":{"word":"anger","phonemes":["AE","NG","G","ER"],"ipa":"ˈæŋgɝ"},
   "angle":{"word":"angle","phonemes":["AE","NG","G","AH","L"],"ipa":"ˈæŋgʌɫ"},

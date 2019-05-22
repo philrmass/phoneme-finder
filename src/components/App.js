@@ -19,10 +19,9 @@ function App(props) {
   const [common, setCommon] = useState([]);
 
   useEffect(() => {
-    const words = commonWords.join(' ');
-    decodePhrase(words).then((decoded) => {
-      setCommon(decoded);
-    });
+    //??? make more efficient, add back all words
+    //console.log('ENTRIES', Object.entries(decodedData));
+    setCommon(commonWords.slice(0, 100).map((word) => decodedData[word.toLowerCase()]));
   }, []);
 
   const save = () => {
