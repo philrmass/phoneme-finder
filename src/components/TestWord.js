@@ -1,12 +1,31 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import PhonemeDisplay from './PhonemeDisplay';
 import styles from '../styles/TestWord.module.css';
 
 function WordDisplay(props) {
   const [shownCount, setShownCount] = useState(0);
+  const [clickTime, setClickTime] = useState(0);
+  const [dropError, setDropError] = useState(false);
   const isComplete = props.isActive && (shownCount === props.def.phonemes.length);
-  const classes = (props.isActive ? ' ' + styles.active : '') + (isComplete ? ' ' + styles.complete : '');
+  const classes = (props.isActive ? ' ' + styles.active : '') +
+    (isComplete ? ' ' + styles.complete : '') +
+    (dropError ? ' ' + styles.dropError : '');
+
+  useEffect(() => {
+    if (dropError) {
+      setTimeout(() => setDropError(false), 400);
+    }
+  }, [dropError]);
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    const now = Date.now();
+    if ((now - clickTime) < 500) {
+      handleDoubleClick(e);
+    }
+    setClickTime(now);
+  };
 
   const handleDoubleClick = (e) => {
     if (isComplete) {
@@ -32,6 +51,8 @@ function WordDisplay(props) {
     if (props.isActive && !isComplete &&
       (dropPhoneme === props.def.phonemes[shownCount])) {
       setShownCount(shownCount + 1);
+    } else {
+      setDropError(true);
     }
   };
 
@@ -53,6 +74,7 @@ function WordDisplay(props) {
         <div
           className={styles.testWord + classes}
           onMouseDown={(e) => e.preventDefault()}
+          onClick={handleClick}
           onDoubleClick={handleDoubleClick}
           onDragOver={handleDragOver}
           onDrop={handleDrop}>

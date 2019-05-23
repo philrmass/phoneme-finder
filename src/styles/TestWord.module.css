@@ -38,3 +38,7 @@
 .complete {
   background: #c0ffd0;
 }
+
+.dropError {
+  background: #ffc0c0;
+}
