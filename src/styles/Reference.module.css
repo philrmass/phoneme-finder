@@ -14,10 +14,21 @@
   font-size: 2.0em;
 }
 
-.group {
+.groups {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   margin: 0 4px;
+}
+
+.groupName {
+  transform: rotate(-90deg) translate(-60%, 0);
+  height: 1.8em;
+  width: 2.5em;
+  margin-top: 8px;
+  font-size: 0.95em;
+  line-height: 1.8em;
+  white-space: nowrap;
 }
 
 .phonemeKey {

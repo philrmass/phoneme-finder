@@ -39,20 +39,20 @@ main {
 
 .testWords {
   margin-bottom: 16px;
-  font-size: 1.2rem;
+  font-size: 1.0rem;
 }
 
 .phonemeReference {
   margin-top: 16px;
-  font-size: 1.2rem;
+  font-size: 1.0rem;
 }
 
 .complete {
   margin-top: 16px;
-  font-size: 1.2rem;
+  font-size: 1.0rem;
 }
 
 .common {
   margin-top: 16px;
-  font-size: 1.2rem;
+  font-size: 1.0rem;
 }

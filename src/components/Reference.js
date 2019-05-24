@@ -9,9 +9,6 @@ import WordDisplay from './WordDisplay';
 import styles from '../styles/Reference.module.css';
 
 function Reference(props) {
-  const phonemes = groups.reduce((phonemes, group) => {
-    return groupPhonemes[group].reduce((phonemes, phoneme) => [...phonemes, phoneme], phonemes);
-  }, []);
   const [isOpen, setIsOpen] = useState(true);
   const [input, setInput] = useState('');
   const [search, setSearch] = useState('');
@@ -61,6 +58,19 @@ function Reference(props) {
     );
   }
 
+  function phonemeGroup(group, defs) {
+    return (
+      <React.Fragment key={group}>
+        <div className={styles.groupName}>{ group }</div>
+        { groupPhonemes[group].map((phoneme) => (
+          <div key={phoneme}>
+            { phonemeKey(phoneme, defs[words[phoneme]]) }
+          </div>
+        ))}
+      </React.Fragment>
+    );
+  }
+
   return (
     <div className='phonemeReference'>
       <div className={styles.phonemeReference}>
@@ -78,8 +88,8 @@ function Reference(props) {
         <div className={styles.searchDisplay}>
           <PhraseDisplay defs={searchDefs}/>
         </div>
-        <div className={styles.group}>
-          { phonemes.map((phoneme) => phonemeKey(phoneme, referenceDefs[words[phoneme]])) }
+        <div className={styles.groups}>
+          { groups.map((group) => phonemeGroup(group, referenceDefs)) }
         </div>
       </div>
     </div>
