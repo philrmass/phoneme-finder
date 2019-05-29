@@ -1,17 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { getFrequencies } from '../lib/frequencies';
+import FrequencyGraph from './FrequencyGraph';
 import WordDisplay from './WordDisplay';
 import styles from '../styles/Common.module.css';
 
 function Common(props) {
   const [isOpen, setIsOpen] = useState(true);
-  const [count, setCount] = useState(100);
+  const [frequencyIsOpen, setFrequencyIsOpen] = useState(true);
+  const [frequencies, setFrequencies] = useState([]);
+  const [frequenciesTotal, setFrequenciesTotal] = useState(0);
   const [results, setResults] = useState([]);
   const resultsMax = 100;
 
   useEffect(() => {
+    if (frequencyIsOpen) {
+      const [frequencies, total] = getFrequencies(props.countDefs.map((dc) => dc[1]));
+      setFrequencies(frequencies);
+      setFrequenciesTotal(total);
+    }
+  }, [frequencyIsOpen, props.countDefs]);
+
+  useEffect(() => {
+    const count = 0;
     setResults(props.countDefs.slice(count, count + resultsMax));
-  }, [props.countDefs, count]);
+  }, [props.countDefs]);
 
   return (
     <div className='common'>
@@ -23,7 +36,16 @@ function Common(props) {
         </div>
         { isOpen && (
           <React.Fragment>
-            <div className={styles.subtitle}>Phoneme Frequency</div>
+            <div
+              className={styles.subtitle}
+              onClick={() => setFrequencyIsOpen(!frequencyIsOpen)}>
+              Phoneme Frequency
+              { frequencyIsOpen && (
+                <FrequencyGraph
+                  values={frequencies}
+                  total={frequenciesTotal}/>
+              )}
+            </div>
             <div className={styles.words}>
               { results.map((countDef, index) => (
                 <React.Fragment key={countDef[1].word + index}>
