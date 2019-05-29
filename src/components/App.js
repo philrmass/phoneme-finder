@@ -37,7 +37,14 @@ function App(props) {
   //??? add load
 
   const addTest = (defs) => {
-    setTest([...test, ...defs]);
+    const uniques = Array.from(new Set(defs));
+    setTest([...test,
+      ...(uniques.filter((unique) => {
+        return test.reduce((ok, t) => {
+          return ok && (t.word !== unique.word);
+        }, true);
+      })),
+    ]);
   };
 
   const removeTest = (def) => {
