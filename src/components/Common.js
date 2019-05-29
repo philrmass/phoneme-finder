@@ -52,7 +52,7 @@ function Common(props) {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    setSearch(input);
+    setSearch(input.toLowerCase());
     setInput('');
   };
 
