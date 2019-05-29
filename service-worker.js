@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/phoneme-finder/precache-manifest.a4c25924d04372d4bd393bdf10c9867c.js"
+  "/phoneme-finder/precache-manifest.d9a008b6cf23e496206759f038c208e8.js"
 );
 
 workbox.clientsClaim();
