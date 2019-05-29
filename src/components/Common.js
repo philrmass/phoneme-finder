@@ -1,10 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import WordDisplay from './WordDisplay';
 import styles from '../styles/Common.module.css';
 
 function Common(props) {
   const [isOpen, setIsOpen] = useState(true);
+  const [count, setCount] = useState(100);
+  const [results, setResults] = useState([]);
+  const resultsMax = 100;
+
+  useEffect(() => {
+    setResults(props.countDefs.slice(count, count + resultsMax));
+  }, [props.countDefs, count]);
 
   return (
     <div className='common'>
@@ -18,12 +25,12 @@ function Common(props) {
           <React.Fragment>
             <div className={styles.subtitle}>Phoneme Frequency</div>
             <div className={styles.words}>
-              { props.defs.map((def, index) => (
-                <React.Fragment key={def.word + index}>
+              { results.map((countDef, index) => (
+                <React.Fragment key={countDef[1].word + index}>
                   <div>
-                    <div className={styles.count}>{index + 1}</div>
+                    <div className={styles.count}>{countDef[0]}</div>
                     <div className={styles.word}>
-                      <WordDisplay def={def}/>
+                      <WordDisplay def={countDef[1]}/>
                     </div>
                   </div>
                 </React.Fragment>
@@ -37,7 +44,7 @@ function Common(props) {
 }
 
 Common.propTypes = {
-  defs: PropTypes.arrayOf(PropTypes.object),
+  countDefs: PropTypes.arrayOf(PropTypes.array),
 };
 
 export default Common;

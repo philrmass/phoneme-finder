@@ -19,9 +19,7 @@ function App(props) {
   const [common, setCommon] = useState([]);
 
   useEffect(() => {
-    //??? make more efficient, add back all words
-    //console.log('ENTRIES', Object.entries(decodedData));
-    setCommon(commonWords.slice(0, 100).map((word) => decodedData[word.toLowerCase()]));
+    setCommon(commonWords.map((word, index) => [index + 1, decodedData[word.toLowerCase()]]));
   }, []);
 
   const save = () => {
@@ -69,7 +67,7 @@ function App(props) {
           onComplete={addComplete}/>
         <Reference decodePhrase={decodePhrase}/>
         <Complete defs={complete}/>
-        <Common defs={common}/>
+        <Common countDefs={common}/>
       </main>
     </React.Fragment>
   );
