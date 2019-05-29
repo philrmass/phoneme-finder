@@ -29,6 +29,23 @@ main {
   padding: 16px;
 }
 
+form {
+  margin: 4px 2px;
+}
+
+.title {
+  margin: 2px 8px 2px 0;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.subtitle {
+  margin: 2px 8px 2px 0;
+  font-size: 1.2em;
+  font-weight: bold;
+  color: var(--mid-text-color);
+}
+
 .margin-left-4 {
   margin-left: 4px;
 }

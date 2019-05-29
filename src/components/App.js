@@ -60,10 +60,12 @@ function App(props) {
     <React.Fragment>
       <header className={styles.header}>
         <h1>Phoneme Finder</h1>
-        { saveUrl &&
-        <a href={saveUrl} download='phonmeFinder.json'>Download</a>
+        <div>
+          { saveUrl &&
+          <a className={styles.download} href={saveUrl} download='phonmeFinder.json'>Download</a>
         }
-        <button onClick={save}>Save</button>
+          <button onClick={save}>Save</button>
+        </div>
       </header>
       <main>
         <Test

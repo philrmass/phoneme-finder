@@ -4,16 +4,7 @@
   padding: 4px;
 }
 
-.title {
-  margin-right: 8px;
-  font-size: 1.2em;
-  font-weight: bold;
-}
-
 .inactiveWords {
   display: flex;
   flex-wrap: wrap;
-}
-
-.inactiveWord {
 }

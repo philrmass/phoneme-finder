@@ -74,23 +74,27 @@ function Reference(props) {
   return (
     <div className='phonemeReference'>
       <div className={styles.phonemeReference}>
-        <form onSubmit={onSubmit}>
-          <label
-            className={styles.title}
-            htmlFor='search'
-            onClick={() => setIsOpen(!isOpen)}>
-            Phoneme Reference
-          </label>
-          <input id='search' type='text' value={input} onChange={(e) => setInput(e.target.value)}/>
-          <button className='margin-left-4' type='submit'>Search</button>
-          <button className='margin-left-4' onClick={handleClear}>Clear</button>
-        </form>
-        <div className={styles.searchDisplay}>
-          <PhraseDisplay defs={searchDefs}/>
+        <div
+          className='title'
+          htmlFor='search'
+          onClick={() => setIsOpen(!isOpen)}>
+          Phoneme Reference
         </div>
-        <div className={styles.groups}>
-          { groups.map((group) => phonemeGroup(group, referenceDefs)) }
-        </div>
+        { isOpen && (
+          <React.Fragment>
+            <form onSubmit={onSubmit}>
+              <input type='text' value={input} onChange={(e) => setInput(e.target.value)}/>
+              <button className='margin-left-4' type='submit'>Search</button>
+              <button className='margin-left-4' onClick={handleClear}>Clear</button>
+            </form>
+            <div className={styles.searchDisplay}>
+              <PhraseDisplay defs={searchDefs}/>
+            </div>
+            <div className={styles.groups}>
+              { groups.map((group) => phonemeGroup(group, referenceDefs)) }
+            </div>
+          </React.Fragment>
+        )}
       </div>
     </div>
   );

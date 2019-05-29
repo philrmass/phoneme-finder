@@ -32,36 +32,40 @@ function Test(props) {
   return (
     <div className='testWords'>
       <div className={styles.testWords}>
-        <form onSubmit={onSubmit}>
-          <label
-            className={styles.title}
-            htmlFor='input'
-            onClick={() => setIsOpen(!isOpen)}>
-            Test Words
-          </label>
-          <input id='input' type='text' value={input} onChange={(e) => setInput(e.target.value)}/>
-          <button className='margin-left-4' type='submit'>Add</button>
-        </form>
-        <div className={styles.inactiveWords}>
-          { isOpen && props.defs.filter((d) => d.word !== activeWord).map((def) =>
-            (<TestWord
-              key={def.word}
-              def={def}
-              isActive={def.word === activeWord}
-              onActivate={handleActivate}/>
-            ))}
+        <div
+          className='title'
+          htmlFor='input'
+          onClick={() => setIsOpen(!isOpen)}>
+          Test Words
         </div>
-        <div className={styles.activeWord}>
-          { isOpen && props.defs.filter((d) => d.word === activeWord).map((def) =>
-              (<TestWord
-                key={def.word}
-                def={def}
-                isActive={def.word === activeWord}
-                onActivate={handleActivate}
-                onRemove={props.onRemove}
-                onComplete={props.onComplete}/>
-              ))}
-        </div>
+        { isOpen && (
+          <React.Fragment>
+            <form onSubmit={onSubmit}>
+              <input id='input' type='text' value={input} onChange={(e) => setInput(e.target.value)}/>
+              <button className='margin-left-4' type='submit'>Add</button>
+            </form>
+            <div className={styles.inactiveWords}>
+              { props.defs.filter((d) => d.word !== activeWord).map((def) =>
+                (<TestWord
+                  key={def.word}
+                  def={def}
+                  isActive={def.word === activeWord}
+                  onActivate={handleActivate}/>
+                ))}
+            </div>
+            <div className={styles.activeWord}>
+              { props.defs.filter((d) => d.word === activeWord).map((def) =>
+                (<TestWord
+                  key={def.word}
+                  def={def}
+                  isActive={def.word === activeWord}
+                  onActivate={handleActivate}
+                  onRemove={props.onRemove}
+                  onComplete={props.onComplete}/>
+                ))}
+            </div>
+          </React.Fragment>
+        )}
       </div>
     </div>
   );

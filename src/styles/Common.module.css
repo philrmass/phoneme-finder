@@ -4,18 +4,6 @@
   padding: 4px;
 }
 
-.title {
-  margin-right: 8px;
-  font-size: 1.2em;
-  font-weight: bold;
-}
-
-.subtitle {
-  font-size: 1.1em;
-  font-weight: bold;
-  color: var(--mid-text-color);
-}
-
 .words {
   display: flex;
   flex-wrap: wrap;
@@ -25,5 +13,7 @@
   font-size: 1.6em;
 }
 
-.word {
+.message {
+  margin-left: 8px;
+  font-size: 1.15em;
 }

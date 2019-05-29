@@ -7,7 +7,7 @@ import styles from '../styles/Complete.module.css';
 
 function Complete(props) {
   const [isOpen, setIsOpen] = useState(true);
-  const [frequencyIsOpen, setFrequencyIsOpen] = useState(true);
+  const [frequencyIsOpen, setFrequencyIsOpen] = useState(false);
   const [frequencies, setFrequencies] = useState([]);
   const [frequenciesTotal, setFrequenciesTotal] = useState(0);
 
@@ -23,14 +23,14 @@ function Complete(props) {
     <div className='complete'>
       <div className={styles.complete}>
         <div
-          className={styles.title}
+          className='title'
           onClick={() => setIsOpen(!isOpen)}>
           Complete Words
         </div>
         { isOpen && (
           <React.Fragment>
             <div
-              className={styles.subtitle}
+              className='subtitle'
               onClick={() => setFrequencyIsOpen(!frequencyIsOpen)}>
               Phoneme Frequency
               { frequencyIsOpen && (

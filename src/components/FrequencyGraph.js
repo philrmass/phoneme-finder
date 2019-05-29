@@ -9,8 +9,8 @@ function FrequencyGraph(props) {
     <React.Fragment>
       <div className={styles.graph}>
         { props.values.map((value) => {
-          const totalPercent = 100 * (value[1] / props.total);
-          const barPercent = 100 * (value[1] / max);
+          const totalPercent = (100 * (value[1] / props.total)) || 0;
+          const barPercent = (100 * (value[1] / max)) || 0;
           return (
             <React.Fragment key={value[0]}>
               <div className={styles.percent}>{totalPercent.toFixed(1)}%</div>
